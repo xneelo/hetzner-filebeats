@@ -45,6 +45,7 @@ class filebeats (
   $shield_password          = $filebeats::params::shield_password,
   $elasticsearch_proxy_host = $filebeats::params::elasticsearch_proxy_host,
 ){
+  include ::filebeats::params
   include ::filebeats::package
   include ::filebeats::service
 
@@ -54,4 +55,5 @@ class filebeats (
     shield_password          => $shield_password,
     elasticsearch_proxy_host => $elasticsearch_proxy_host,
   }
+  Class['::filebeats::params']-> Class['::filebeats::config']
 }
