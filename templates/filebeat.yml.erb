@@ -1,0 +1,16 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+<% @export_log_paths.each do |path| %>
+        - <%= path %>
+<% end %>
+      input_type: log
+  registry_file: /var/lib/filebeat/registry
+output:
+  elasticsearch:
+    hosts: [<%= @elasticsearch_proxy_host %>]
+<% if @shield_username != '' %>
+    username: "<%= @shield_username %>"
+    password: "<%= @shield_passord %>"
+<% end %>

@@ -1,48 +1,58 @@
 # Class: filebeats
 # ===========================
 #
-# Full description of class filebeats here.
+# This module will install and configure a very basic filebeats installation.
 #
 # Parameters
 # ----------
 #
 # Document parameters here.
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
+# * `export_log_paths`
+# An array of Strings that specifies which logs the filebeats application must export.
+# * `shield_username`
+# The username filebeats should use to authenticate should your cluster make use of shield
+# * `shield_password`
+# The password filebeats should use to authenticate should your cluster make use of shield
+# * `elasticsearch_proxy_host`
+# A string containing the hostname of your proxy host used for load balancing your cluster.
+# If left empty it will default to exporting logs to your local host on port 9200.
 #
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
-#
-# Examples
+# Example
 # --------
 #
 # @example
 #    class { 'filebeats':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#      export_log_paths         => ['/var/log/auth.log'],
+#      shield_username          => 'host',
+#      shield_password          => 'secret',
+#      elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
 #    }
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Author Name <henlu.starke@hetzner.co.za>
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Henlu Starke, unless otherwise noted.
 #
-class filebeats {
+class filebeats (
+  $export_log_paths    = $::filebeats::params::export_log_paths,
+  $shield_username     = $::filebeats::params::shield_username,
+  $shield_password     = $::filebeats::params::shield_password,
+  $elasticsearch_proxy_host = $::filebeats::params::elasticsearch_proxy_host,
+){
+  include ::filebeats::package
 
-
+  anchor {'filebeats_first':} -> Class['::filebeats::package']->
+Class['::filebeats::service']
+  -> Class{'::filebeats::config':
+    export_log_paths         => $export_log_paths,
+    shield_username          => $shield_username,
+    shield_password          => $shield_password,
+    elasticsearch_proxy_host => $elasticsearch_proxy_host,
+  }-> anchor {'filebeats_last':}
 }
