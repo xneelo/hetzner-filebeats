@@ -1,0 +1,15 @@
+{
+  "name": "hetzner-filebeats",
+  "version": "0.0.1",
+  "author": "Henlu Starke",
+  "summary": "Simple module to install and configure filebeats for elasticsearch",
+  "license": "Apache-2.0",
+  "source": "git@github.com:hetznerZA/hetzner-filebeats.git",
+  "project_page": "https://www.elastic.co/products/beats",
+  "issues_url": "https://github.com/hetznerZA/hetzner-filebeats/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
