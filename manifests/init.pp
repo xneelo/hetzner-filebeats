@@ -40,16 +40,17 @@
 # Copyright 2016 Henlu Starke, unless otherwise noted.
 #
 class filebeats (
-  $export_log_paths    = $::filebeats::params::export_log_paths,
-  $shield_username     = $::filebeats::params::shield_username,
-  $shield_password     = $::filebeats::params::shield_password,
-  $elasticsearch_proxy_host = $::filebeats::params::elasticsearch_proxy_host,
+  $export_log_paths         = $filebeats::params::export_log_paths,
+  $shield_username          = $filebeats::params::shield_username,
+  $shield_password          = $filebeats::params::shield_password,
+  $elasticsearch_proxy_host = $filebeats::params::elasticsearch_proxy_host,
 ){
   include ::filebeats::package
+  include ::filebeats::service
 
-  anchor {'filebeats_first':} -> Class['::filebeats::package']->
-Class['::filebeats::service']
-  -> Class{'::filebeats::config':
+  anchor {'filebeats_first':} ->
+Class['::filebeats::package']->Class['::filebeats::service']
+  -> class{'::filebeats::config':
     export_log_paths         => $export_log_paths,
     shield_username          => $shield_username,
     shield_password          => $shield_password,

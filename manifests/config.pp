@@ -11,14 +11,15 @@ class filebeats::config (
   $shield_password,
   $elasticsearch_proxy_host,
 ){
-  $config_path = $::filebeat::params::config_path
+  $config_path = $filebeats::params::config_path
 
   file {"${config_path}/filebeat.yml":
     ensure  => present,
     owner   => root,
     group   => root,
     mode    => '0640',
-    content => template('modules/filebeat/filebeat.yml.erb'),
+    content => template('filebeats/filebeat.yml.erb'),
+    notify  => Service['filebeats'],
   }
 
 }

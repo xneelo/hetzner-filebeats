@@ -1,7 +1,6 @@
 # Filebeats default params
 
-class filesbeats::params {
-  $export_log_paths    = ['/var/log/*.log']
+class filebeats::params {
   $shield_username     = ''
   $shield_password     = ''
   $elasticsearch_proxy_host = 'localhost:9200'
