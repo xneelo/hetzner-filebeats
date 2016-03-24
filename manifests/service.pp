@@ -1,7 +1,7 @@
 # Basic filebeat installation service declaration
 
 class filebeats::service {
-  service {'filebeat':
+  service {'filebeats':
     ensure => running,
   }
 }
