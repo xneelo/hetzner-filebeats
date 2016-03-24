@@ -1,4 +1,4 @@
-# filebeats
+# Filebeats
 
 #### Table of Contents
 
