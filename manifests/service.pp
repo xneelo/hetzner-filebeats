@@ -2,6 +2,7 @@
 
 class filebeats::service {
   service {'filebeats':
-    ensure => running,
+    ensure  => running,
+    require => Package['filebeats'],
   }
 }

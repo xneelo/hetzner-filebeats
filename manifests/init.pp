@@ -48,12 +48,10 @@ class filebeats (
   include ::filebeats::package
   include ::filebeats::service
 
-  anchor {'filebeats_first':} ->
-Class['::filebeats::package']->Class['::filebeats::service']
-  -> class{'::filebeats::config':
+  class{'::filebeats::config':
     export_log_paths         => $export_log_paths,
     shield_username          => $shield_username,
     shield_password          => $shield_password,
     elasticsearch_proxy_host => $elasticsearch_proxy_host,
-  }-> anchor {'filebeats_last':}
+  }
 }

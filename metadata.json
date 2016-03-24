@@ -1,6 +1,6 @@
 {
   "name": "hetzner-filebeats",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Henlu Starke",
   "summary": "Simple module to install and configure filebeats for elasticsearch",
   "license": "Apache-2.0",
