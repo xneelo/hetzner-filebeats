@@ -32,25 +32,33 @@ Use puppet module install function to install module and simply include it from 
 
 The module can be called with the following parameters:
 *`export_log_paths`
- An array of Strings that specifies which logs the filebeats application must export.
+
+An array of Strings that specifies which logs the filebeats application must export.
 *`shield_username`
- The username filebeats should use to authenticate should your cluster make use of shield
+
+The username filebeats should use to authenticate should your cluster make use of shield
 *`shield_password`
- The password filebeats should use to authenticate should your cluster make use of shield
+
+The password filebeats should use to authenticate should your cluster make use of shield
 *`elasticsearch_proxy_host`
- A string containing the hostname of your proxy host used for load balancing your cluster.
- If left empty it will default to exporting logs to your local host on port 9200.
+
+A string containing the hostname of your proxy host used for load balancing your cluster.
+If left empty it will default to exporting logs to your local host on port 9200.
 
 ## Reference
 
 * `Package`
- Configures the apt resrouce for filebeats.
+
+Configures the apt resrouce for filebeats.
 * `Config`
- Configures the filebeats.yml file.
+
+Configures the filebeats.yml file.
 * `Service`
- Ensures the service is running.
+
+Ensures the service is running.
 * `Params`
-  Specifies defaults for the installation and configuration
+
+Specifies defaults for the installation and configuration
 
 ## Limitations
 
