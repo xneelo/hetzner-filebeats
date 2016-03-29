@@ -19,6 +19,7 @@ class filebeats::config (
     group   => root,
     mode    => '0640',
     content => template('filebeats/filebeat.yml.erb'),
+    require => Package['filebeat'],
     notify  => Service['filebeat'],
   }
 
