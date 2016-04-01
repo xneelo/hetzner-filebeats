@@ -53,8 +53,8 @@ class filebeats (
   $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
   $tls_certificate             = $filebeats::params::tls_certificate,
   $tls_certificate_key         = $filebeats::params::tls_certificate_key,
-){
-  include ::filebeats::params
+) inherits ::filebeats::params {
+
   include ::filebeats::package
   include ::filebeats::service
 
