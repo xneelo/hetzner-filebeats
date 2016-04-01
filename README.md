@@ -49,6 +49,18 @@ The password filebeats should use to authenticate should your cluster make use o
 A string containing the hostname of your proxy host used for load balancing your cluster.
 If left empty it will default to exporting logs to your local host on port 9200.
 
+*`tls_certificate_authorities`
+
+An array of Strings that specifies paths to Certificate authority files.
+
+*`tls_certificate`
+
+A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
+
+*`tls_certificate_key`
+
+A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
+
 ## Reference
 
 * `Package`

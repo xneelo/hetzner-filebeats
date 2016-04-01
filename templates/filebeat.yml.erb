@@ -14,3 +14,18 @@ output:
     username: "<%= @shield_username %>"
     password: "<%= @shield_password %>"
 <% end -%>
+<% if @tls_certificate_authorities != [] -%>
+    tls:
+<% end -%>
+<% if @tls_certificate_authorities != [] -%>
+      certificate_authorities:
+<% @tls_certificate_authorities.each do | authoritory | -%>
+        - "<%= authoritory %>"
+<% end -%>
+<% end -%>
+<% if @tls_certificate != '' -%>
+      certificate: <%= @tls_certificate %>
+<% end -%>
+<% if @tls_certificate_key != '' -%>
+      certificate_key: <%= @tls_certificate_key %>
+<% end -%>

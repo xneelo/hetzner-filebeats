@@ -17,6 +17,12 @@
 # * `elasticsearch_proxy_host`
 # A string containing the hostname of your proxy host used for load balancing your cluster.
 # If left empty it will default to exporting logs to your local host on port 9200.
+# * `tls_certificate_authorities`
+# An array of Strings that specifies paths to Certificate authority files.
+# * `tls_certificate`
+# A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
+# * `tls_certificate_key`
+# A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 #
 # Example
 # --------
@@ -40,20 +46,26 @@
 # Copyright 2016 Henlu Starke, unless otherwise noted.
 #
 class filebeats (
-  $export_log_paths         = $filebeats::params::export_log_paths,
-  $shield_username          = $filebeats::params::shield_username,
-  $shield_password          = $filebeats::params::shield_password,
-  $elasticsearch_proxy_host = $filebeats::params::elasticsearch_proxy_host,
+  $export_log_paths            = $filebeats::params::export_log_paths,
+  $shield_username             = $filebeats::params::shield_username,
+  $shield_password             = $filebeats::params::shield_password,
+  $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
+  $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
+  $tls_certificate             = $filebeats::params::tls_certificate,
+  $tls_certificate_key         = $filebeats::params::tls_certificate_key,
 ){
   include ::filebeats::params
   include ::filebeats::package
   include ::filebeats::service
 
   class{'::filebeats::config':
-    export_log_paths         => $export_log_paths,
-    shield_username          => $shield_username,
-    shield_password          => $shield_password,
-    elasticsearch_proxy_host => $elasticsearch_proxy_host,
+    export_log_paths            => $export_log_paths,
+    shield_username             => $shield_username,
+    shield_password             => $shield_password,
+    elasticsearch_proxy_host    => $elasticsearch_proxy_host,
+    tls_certificate_authorities => $tls_certificate_authorities,
+    tls_certificate             => $tls_certificate,
+    tls_certificate_key         => $tls_certificate_key,
   }
   Class['::filebeats::params']-> Class['::filebeats::config']
 }

@@ -4,6 +4,9 @@ class filebeats::params {
   $shield_username     = ''
   $shield_password     = ''
   $elasticsearch_proxy_host = 'localhost:9200'
+  $tls_certificate_authorities = []
+  $tls_certificate =  ''
+  $tls_certificate_key =  ''
   case $::osfamily {
     'Debian': {
       $export_log_paths    = ['/var/log/*.log']
