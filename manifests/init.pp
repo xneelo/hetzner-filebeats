@@ -17,6 +17,8 @@
 # * `elasticsearch_proxy_host`
 # A string containing the hostname of your proxy host used for load balancing your cluster.
 # If left empty it will default to exporting logs to your local host on port 9200.
+# * `elasticsearch_protocol`
+# A string containing the protocl used by filebeats to send logs.
 # * `tls_certificate_authorities`
 # An array of Strings that specifies paths to Certificate authority files.
 # * `tls_certificate`
@@ -50,6 +52,7 @@ class filebeats (
   $shield_username             = $filebeats::params::shield_username,
   $shield_password             = $filebeats::params::shield_password,
   $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
+  $elasticsearch_protocol      = $filebeats::params::elasticsearch_protocol,
   $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
   $tls_certificate             = $filebeats::params::tls_certificate,
   $tls_certificate_key         = $filebeats::params::tls_certificate_key,
@@ -63,6 +66,7 @@ class filebeats (
     shield_username             => $shield_username,
     shield_password             => $shield_password,
     elasticsearch_proxy_host    => $elasticsearch_proxy_host,
+    elasticsearch_protocol      => $elasticsearch_protocol,
     tls_certificate_authorities => $tls_certificate_authorities,
     tls_certificate             => $tls_certificate,
     tls_certificate_key         => $tls_certificate_key,

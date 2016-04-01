@@ -19,7 +19,7 @@ Very simple puppet module to install and configure elastic search file beats
 
 puppet module install hetzner-filebeats
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 Puppet labs APT module version 1.8.0 >=
 Puppet labs STDLIB module version 4.6.0 >=
@@ -48,6 +48,10 @@ The password filebeats should use to authenticate should your cluster make use o
 
 A string containing the hostname of your proxy host used for load balancing your cluster.
 If left empty it will default to exporting logs to your local host on port 9200.
+
+*`elasticsearch_protocol`
+
+A string containing the protocol used by filebeats, defaults to http. 
 
 *`tls_certificate_authorities`
 

@@ -10,6 +10,7 @@ filebeat:
 output:
   elasticsearch:
     hosts: ["<%= @elasticsearch_proxy_host %>"]
+    protocol: "<%= @elasticsearch_protocol%>"
 <% if @shield_username != '' -%>
     username: "<%= @shield_username %>"
     password: "<%= @shield_password %>"

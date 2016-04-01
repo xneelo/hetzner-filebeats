@@ -10,6 +10,7 @@ class filebeats::config (
   $shield_username,
   $shield_password,
   $elasticsearch_proxy_host,
+  $elasticsearch_protocol,
   $tls_certificate_authorities,
   $tls_certificate,
   $tls_certificate_key,
