@@ -11,6 +11,7 @@ class filebeats::params {
   $log_settings             = {
                                 level => 'error',
                                 to_syslog => false,
+                                to_files  => true,
                                 path  => '/var/log/filebeat',
                                 keepfiles => 7,
                                 name  => 'filebeats.log',

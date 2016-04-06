@@ -36,7 +36,7 @@ logging:
 <% if @logging['to_syslog'] %>
   to_syslog: <%= @logging['to_syslog'] %>
 <% else -%>
-  to_files: <%= @logging['level'] %>
+  to_files: <%= @logging['to_files'] %>
   to_syslog: <%= @logging['to_syslog'] %>
   files:
     path: <%= @logging['path'] %>
