@@ -23,6 +23,7 @@ puppet module install hetzner-filebeats
 
 Puppet labs APT module
   version 1.8.0 >=
+
 Puppet labs STDLIB module
   version 4.6.0 >=
 

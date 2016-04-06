@@ -7,6 +7,13 @@
   "source": "git@github.com:hetznerZA/hetzner-filebeats.git",
   "project_page": "https://github.com/hetznerZA/hetzner-filebeats",
   "issues_url": "https://github.com/hetznerZA/hetzner-filebeats/issues",
+  "operatingsystem_support": [
+    {"operatingsystem": "Debian","operatingsystemrelease": ["7"]}
+  ],
+  "requirements": [
+    {"name": "puppet","version_requirement": "3.x"},
+    {"name": "filebeats","version_requirement": "1.2.x"}
+  ],
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 4.6.0"},
     {"name":"puppetlabs-apt","version_requirement":">= 1.8.0"}
