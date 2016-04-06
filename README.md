@@ -21,12 +21,14 @@ puppet module install hetzner-filebeats
 
 ### Setup Requirements
 
-Puppet labs APT module version 1.8.0 >=
-Puppet labs STDLIB module version 4.6.0 >=
+Puppet labs APT module
+  version 1.8.0 >=
+Puppet labs STDLIB module
+  version 4.6.0 >=
 
 ### Beginning with filebeats
 
-Use puppet module install function to install module and simply include it from your enc/site.pp.
+Use puppet module install function to install module and simply include it from your enc/profile/role/site.pp.
 
 ## Usage
 
@@ -65,6 +67,10 @@ A String that specifies a path to your hosts certificate to use when connecting 
 
 A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 
+*`log_settings`
+
+A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
+
 ## Reference
 
 * `Package`
@@ -85,7 +91,7 @@ Specifies defaults for the installation and configuration
 
 ## Limitations
 
-Does not support SSL/TLS or any other customisations to log exporting besides the very basics.
+Does not support all options available to filebeats configuration.
 
 ## Development
 

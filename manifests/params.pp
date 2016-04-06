@@ -8,6 +8,14 @@ class filebeats::params {
   $tls_certificate_authorities = []
   $tls_certificate          =  ''
   $tls_certificate_key      =  ''
+  $log_settings             = {
+                                level => 'error',
+                                to_syslog => false,
+                                path  => '/var/log/filebeat',
+                                keepfiles => 7,
+                                name  => 'filebeats.log',
+                                rotateeverybytes => 10485760,
+                              }
   case $::osfamily {
     'Debian': {
       $export_log_paths    = ['/var/log/*.log']

@@ -14,8 +14,15 @@ class filebeats::config (
   $tls_certificate_authorities,
   $tls_certificate,
   $tls_certificate_key,
+  $log_settings,
 ){
   $config_path = $filebeats::params::config_path
+
+  if empty($log_settings) {
+    $logging = {}
+  } else {
+    $logging = merge($::filebeats::params::log_settings, $log_settings)
+  }
 
   file {"${config_path}/filebeat.yml":
     ensure  => present,

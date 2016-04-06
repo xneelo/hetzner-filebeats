@@ -25,6 +25,9 @@
 # A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
 # * `tls_certificate_key`
 # A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
+#*`log_settings`
+# A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'),
+#  to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
 #
 # Example
 # --------
@@ -56,6 +59,7 @@ class filebeats (
   $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
   $tls_certificate             = $filebeats::params::tls_certificate,
   $tls_certificate_key         = $filebeats::params::tls_certificate_key,
+  $log_settings                = {},
 ) inherits ::filebeats::params {
 
   include ::filebeats::package
@@ -70,6 +74,7 @@ class filebeats (
     tls_certificate_authorities => $tls_certificate_authorities,
     tls_certificate             => $tls_certificate,
     tls_certificate_key         => $tls_certificate_key,
+    log_settings                => $log_settings,
   }
   Class['::filebeats::params']-> Class['::filebeats::config']
 }
