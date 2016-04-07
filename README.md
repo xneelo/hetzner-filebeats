@@ -39,6 +39,11 @@ The module can be called with the following parameters:
 
 An array of Strings that specifies which logs the filebeats application must export.
 
+* `prospectors` OPTIONAL
+
+An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
+This value should be used if you wish to have more than one prospector.
+
 *`shield_username`
 
 The username filebeats should use to authenticate should your cluster make use of shield
@@ -71,6 +76,34 @@ A String that specifies a path to your hosts certificate key to use when connect
 *`log_settings`
 
 A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
+
+## Example
+
+Auth.log being exported with only shield login details specified.
+@example
+   class { 'filebeats':
+     export_log_paths         => ['/var/log/auth.log'],
+     shield_username          => 'host',
+     shield_password          => 'secret',
+     elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
+   }
+
+Multiple prospectors with multiple log files being exported.
+@example
+   class { 'filebeats':
+     prospectors              => [{ 'input_type'    => 'log',
+                                    'document_type' => 'log',
+                                    'paths'         =>['/var/log/auth.log']
+                                  },
+                                  { 'input_type'    => 'log',
+                                    'document_type' => 'apache',
+                                    'paths'         =>['/var/log/apache2/access.log', '/var/log/apache2/error.log']
+                                  }
+                                 ]
+     shield_username          => 'host',
+     shield_password          => 'secret',
+     elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
+   }
 
 ## Reference
 

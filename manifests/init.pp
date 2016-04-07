@@ -10,6 +10,8 @@
 #
 # * `export_log_paths`
 # An array of Strings that specifies which logs the filebeats application must export.
+# * `prospectors`
+# An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
 # * `shield_username`
 # The username filebeats should use to authenticate should your cluster make use of shield
 # * `shield_password`
@@ -52,6 +54,7 @@
 #
 class filebeats (
   $export_log_paths            = $filebeats::params::export_log_paths,
+  $prospectors                 = $filebeats::params::prospectors,
   $shield_username             = $filebeats::params::shield_username,
   $shield_password             = $filebeats::params::shield_password,
   $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
@@ -67,6 +70,7 @@ class filebeats (
 
   class{'::filebeats::config':
     export_log_paths            => $export_log_paths,
+    prospectors                 => $prospectors,
     shield_username             => $shield_username,
     shield_password             => $shield_password,
     elasticsearch_proxy_host    => $elasticsearch_proxy_host,

@@ -1,3 +1,10 @@
+##2015-04-07 - Release 0.1.1
+###Summary
+
+Minor update to include multiple prospectors
+* This update allows for an array of hashes to configure multiple prospectors
+* This includes setting of input_type and document type in each hash
+
 ##2015-04-06 - Release 0.1.0
 ###Summary
 

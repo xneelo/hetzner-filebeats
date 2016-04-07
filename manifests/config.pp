@@ -7,6 +7,7 @@
 
 class filebeats::config (
   $export_log_paths,
+  $prospectors,
   $shield_username,
   $shield_password,
   $elasticsearch_proxy_host,
@@ -22,6 +23,15 @@ class filebeats::config (
     $logging = {}
   } else {
     $logging = merge($::filebeats::params::log_settings, $log_settings)
+  }
+
+  if empty($prospectors) {
+    $prospectors_array =  [{'paths'         => $export_log_paths,
+                            'input_type'    => 'log',
+                            'document_type' => 'log'
+                          }]
+  } else {
+    $prospectors_array = $prospectors
   }
 
   file {"${config_path}/filebeat.yml":

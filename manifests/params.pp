@@ -8,6 +8,7 @@ class filebeats::params {
   $tls_certificate_authorities = []
   $tls_certificate          =  ''
   $tls_certificate_key      =  ''
+  $prospectors              = []
   $log_settings             = {
                                 level => 'error',
                                 to_syslog => false,
