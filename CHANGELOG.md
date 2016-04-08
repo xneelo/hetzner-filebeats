@@ -1,3 +1,9 @@
+##2015-04-08 - Release 0.1.3
+###Summary
+
+Fix documentation issues
+* Fix code examples in README, still trying to get a hang of this
+
 ##2015-04-08 - Release 0.1.2
 ###Summary
 
