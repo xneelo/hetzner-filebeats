@@ -92,11 +92,11 @@ Multiple prospectors with multiple log files being exported.
 @example
    class { 'filebeats':
      prospectors              => [{ 'input_type'    => 'log',
-                                    'document_type' => 'log',
+                                    'doc_type' => 'log',
                                     'paths'         =>['/var/log/auth.log']
                                   },
                                   { 'input_type'    => 'log',
-                                    'document_type' => 'apache',
+                                    'doc_type' => 'apache',
                                     'paths'         =>['/var/log/apache2/access.log', '/var/log/apache2/error.log']
                                   }
                                  ]
@@ -104,6 +104,19 @@ Multiple prospectors with multiple log files being exported.
      shield_password          => 'secret',
      elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
    }
+
+## Hiera data example
+
+filebeats::prospectors:
+  - input_type: 'log'
+    paths:
+      - '/var/log/auth.log'
+    doc_type: 'auth'
+  - input_type: 'log'
+    paths:
+      - '/var/log/my_app.log'
+    doc_type: 'my_app'
+
 
 ## Reference
 

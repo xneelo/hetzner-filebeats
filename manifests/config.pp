@@ -26,9 +26,11 @@ class filebeats::config (
   }
 
   if empty($prospectors) {
+    validate_array($export_log_paths)
+
     $prospectors_array =  [{'paths'         => $export_log_paths,
                             'input_type'    => 'log',
-                            'document_type' => 'log'
+                            'doc_type' => 'log'
                           }]
   } else {
     $prospectors_array = $prospectors

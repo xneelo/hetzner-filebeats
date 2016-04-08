@@ -1,13 +1,17 @@
 filebeat:
   prospectors:
-<% @prospectors.each do | prospector | -%>
+<% @prospectors_array.each do | prospector | -%>
     -
       paths:
-<% @export_log_paths.each do |path| -%>
+<% prospector['paths'].each do |path| -%>
         - <%= path %>
 <% end -%>
+<% if prospector['input_type'] != '' -%>
       input_type: <%= prospector['input_type'] %>
-      document_type: <%= prospector['document_type'] %>
+<% end -%>
+<% if prospector['doc_type'] != '' -%>
+      document_type: <%= prospector['doc_type'] %>
+<% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output:
