@@ -94,13 +94,13 @@ Multiple prospectors with multiple log files being exported.
 
 ```
    class { 'filebeats':
-     prospectors              => [{ 'input_type'    => 'log',
-                                    'doc_type' => 'log',
-                                    'paths'         =>['/var/log/auth.log']
+     prospectors              => [{ 'input_type' => 'log',
+                                    'doc_type'   => 'log',
+                                    'paths'      =>['/var/log/auth.log']
                                   },
-                                  { 'input_type'    => 'log',
-                                    'doc_type' => 'apache',
-                                    'paths'         =>['/var/log/apache2/access.log', '/var/log/apache2/error.log']
+                                  { 'input_type' => 'log',
+                                    'doc_type'   => 'apache',
+                                    'paths'      =>['/var/log/apache2/access.log', '/var/log/apache2/error.log']
                                   }
                                  ]
      shield_username          => 'host',

@@ -1,3 +1,9 @@
+##2015-04-08 - Release 0.1.4
+###Summary
+
+Fix documentation issues
+* Minor indetation in documentation
+
 ##2015-04-08 - Release 0.1.3
 ###Summary
 
