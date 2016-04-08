@@ -39,7 +39,7 @@ The module can be called with the following parameters:
 
 An array of Strings that specifies which logs the filebeats application must export.
 
-* `prospectors` OPTIONAL
+*`prospectors` OPTIONAL
 
 An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
 This value should be used if you wish to have more than one prospector.
@@ -80,17 +80,17 @@ A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), 
 ## Example
 
 Auth.log being exported with only shield login details specified.
-@example
-   class { 'filebeats':
+
+```class { 'filebeats':
      export_log_paths         => ['/var/log/auth.log'],
      shield_username          => 'host',
      shield_password          => 'secret',
      elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
-   }
+```}
 
 Multiple prospectors with multiple log files being exported.
-@example
-   class { 'filebeats':
+
+```class { 'filebeats':
      prospectors              => [{ 'input_type'    => 'log',
                                     'doc_type' => 'log',
                                     'paths'         =>['/var/log/auth.log']
@@ -103,11 +103,11 @@ Multiple prospectors with multiple log files being exported.
      shield_username          => 'host',
      shield_password          => 'secret',
      elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
-   }
+```}
 
 ## Hiera data example
 
-filebeats::prospectors:
+```filebeats::prospectors:
   - input_type: 'log'
     paths:
       - '/var/log/auth.log'
@@ -115,7 +115,7 @@ filebeats::prospectors:
   - input_type: 'log'
     paths:
       - '/var/log/my_app.log'
-    doc_type: 'my_app'
+``` doc_type: 'my_app'
 
 
 ## Reference

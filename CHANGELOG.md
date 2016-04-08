@@ -1,3 +1,9 @@
+##2015-04-08 - Release 0.1.2
+###Summary
+
+Fix documentation issues
+* Fix code examples in README
+
 ##2015-04-07 - Release 0.1.1
 ###Summary
 
