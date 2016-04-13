@@ -77,6 +77,26 @@ A String that specifies a path to your hosts certificate key to use when connect
 
 A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
 
+*`service_state`
+
+A string to describe the state of the filebeats service ('stopped'/'running'), defaults to 'running'
+
+*`loadbalance`
+
+A boolean to turn on or off load balancing for logstash outputs, defulats to false.
+
+*`logstash_hosts`
+
+An array of strings that specifies remote hosts to use for logstash outputs, e.g ['localhost:5044']
+
+*`logstash_index`
+
+A string that specifies the index to use for the logstash output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+
+*`elasticsearch_index`
+
+A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+
 ## Example
 
 Auth.log being exported with only shield login details specified.

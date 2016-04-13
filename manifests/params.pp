@@ -2,9 +2,14 @@
 
 class filebeats::params {
   $shield_username          = ''
+  $service_state            = 'running'
+  $loadbalance              = false
   $shield_password          = ''
+  $logstash_hosts           = []
+  $logstash_index           = ''
   $elasticsearch_proxy_host = 'localhost:9200'
   $elasticsearch_protocol   = 'http'
+  $elasticsearch_index      = ''
   $tls_certificate_authorities = []
   $tls_certificate          =  ''
   $tls_certificate_key      =  ''

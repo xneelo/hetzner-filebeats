@@ -15,7 +15,11 @@ class filebeats::config (
   $tls_certificate_authorities,
   $tls_certificate,
   $tls_certificate_key,
+  $loadbalance,
   $log_settings,
+  $logstash_hosts,
+  $logstash_index,
+  $elasticsearch_index,
 ){
   $config_path = $filebeats::params::config_path
 

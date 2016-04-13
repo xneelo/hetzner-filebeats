@@ -1,3 +1,12 @@
+##2015-04-13 - Release 0.1.5
+###Summary
+
+Adding logstash output
+* Added new parameters for logstash output
+* Added param to specify index to ship for both elasticsearch and logstash
+* Added service_state param to allow for overriding
+* Added loadbalancing param for logstash output
+
 ##2015-04-08 - Release 0.1.4
 ###Summary
 

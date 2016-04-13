@@ -62,11 +62,19 @@ class filebeats (
   $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
   $tls_certificate             = $filebeats::params::tls_certificate,
   $tls_certificate_key         = $filebeats::params::tls_certificate_key,
+  $service_state               = $filebeats::params::service_state,
+  $loadbalance                 = $filebeats::params::loadbalance,
+  $logstash_hosts              = $filebeats::params::logstash_hosts,
   $log_settings                = {},
+  $logstash_index              = $filebeats::params::logstash_index,
+  $elasticsearch_index         = $filebeats::params::elasticsearch_index,
 ) inherits ::filebeats::params {
 
   include ::filebeats::package
-  include ::filebeats::service
+
+  class {'::filebeats::service':
+    service_state => $service_state,
+  }
 
   class{'::filebeats::config':
     export_log_paths            => $export_log_paths,
@@ -79,6 +87,12 @@ class filebeats (
     tls_certificate             => $tls_certificate,
     tls_certificate_key         => $tls_certificate_key,
     log_settings                => $log_settings,
+    loadbalance                 => $loadbalance,
+    logstash_hosts              => $logstash_hosts,
+    logstash_index              => $logstash_index,
+    elasticsearch_index         => $elasticsearch_index,
   }
+
   Class['::filebeats::params']-> Class['::filebeats::config']
+  Class['::filebeats::config']-> Class['::filebeats::service']
 }

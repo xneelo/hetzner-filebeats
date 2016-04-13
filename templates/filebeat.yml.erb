@@ -15,12 +15,17 @@ filebeat:
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output:
-  elasticsearch:
-    hosts: ["<%= @elasticsearch_proxy_host %>"]
-    protocol: "<%= @elasticsearch_protocol%>"
-<% if @shield_username != '' -%>
-    username: "<%= @shield_username %>"
-    password: "<%= @shield_password %>"
+<% if @logstash_hosts != [] -%>
+  logstash:
+    hosts:
+<% @logstash_hosts.each do | host | -%>
+        - "<%= host %>"
+<% end -%>
+<% if @loadbalance -%>
+    loadbalance: true
+<% end -%>
+<% if @logstash_index != '' -%>
+    index: <%= @logstash_index %>
 <% end -%>
 <% if @tls_certificate_authorities != [] -%>
     tls:
@@ -36,6 +41,33 @@ output:
 <% end -%>
 <% if @tls_certificate_key != '' -%>
       certificate_key: <%= @tls_certificate_key %>
+<% end -%>
+<% else-%>
+  elasticsearch:
+    hosts: ["<%= @elasticsearch_proxy_host %>"]
+    protocol: "<%= @elasticsearch_protocol%>"
+<% if @shield_username != '' -%>
+    username: "<%= @shield_username %>"
+    password: "<%= @shield_password %>"
+<% end -%>
+<% if @elasticsearch_index != '' -%>
+    index: <%= @elasticsearch_index %>
+<% end -%>
+<% if @tls_certificate_authorities != [] -%>
+    tls:
+<% end -%>
+<% if @tls_certificate_authorities != [] -%>
+      certificate_authorities:
+<% @tls_certificate_authorities.each do | authoritory | -%>
+        - "<%= authoritory %>"
+<% end -%>
+<% end -%>
+<% if @tls_certificate != '' -%>
+      certificate: <%= @tls_certificate %>
+<% end -%>
+<% if @tls_certificate_key != '' -%>
+      certificate_key: <%= @tls_certificate_key %>
+<% end -%>
 <% end -%>
 <% if !@logging.empty? -%>
 logging:
