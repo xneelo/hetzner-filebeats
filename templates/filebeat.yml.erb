@@ -12,6 +12,13 @@ filebeat:
 <% if prospector['doc_type'] != '' -%>
       document_type: <%= prospector['doc_type'] %>
 <% end -%>
+<% if prospector['fields'] -%>
+      fields:
+  <% prospector['fields'].each do |field| -%>
+        <%= field.keys[0] %>: <%= field.values[0] %>
+  <% end -%>
+<% end -%>
+
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output:
