@@ -121,7 +121,7 @@ Multiple prospectors with multiple log files being exported.
                                   { 'input_type' => 'log',
                                     'doc_type'   => 'apache',
                                     'paths'      =>['/var/log/apache2/access.log', '/var/log/apache2/error.log'],
-                                    fields      => { field1 => field_value1,
+                                    'fields'     => { field1 => field_value1,
                                                      field2 => field_value2 
                                                    }
                                   }
