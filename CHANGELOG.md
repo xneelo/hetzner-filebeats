@@ -1,3 +1,10 @@
+##2017-02-02 - Release 0.1.6
+###Summary
+
+Add support for prospector fields
+* Added new prospector option, fields
+* Thanks for the contribution @belskiiartem
+
 ##2015-04-13 - Release 0.1.5
 ###Summary
 
