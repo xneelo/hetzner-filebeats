@@ -12,9 +12,9 @@ filebeat:
 <% if prospector['doc_type'] != '' -%>
       document_type: <%= prospector['doc_type'] %>
 <% end -%>
-<% if prospector['fields'] != [] -%>
+<% if prospector['fields'] -%>
       fields:
-   <% prospector['fields'].each do | field_name, field_value|
+   <% prospector['fields'].each do | field_name, field_value| -%>
           <%= field_name.to_s %>: <%= field_value %>
    <% end -%>
 <% end -%>
