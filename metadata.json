@@ -1,6 +1,6 @@
 {
   "name": "hetzner-filebeats",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "author": "Henlu Starke",
   "summary": "Simple module to install and configure filebeats for elasticsearch",
   "license": "Apache-2.0",
@@ -15,8 +15,8 @@
     {"name": "filebeats","version_requirement": "1.2.x"}
   ],
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 4.6.0"},
-    {"name":"puppetlabs-apt","version_requirement":">= 1.8.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.6.0 < 5.0.0"},
+    {"name":"puppetlabs-apt","version_requirement":">= 2.3.0"}
   ],
   "data_provider": null
 }

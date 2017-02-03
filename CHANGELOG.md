@@ -1,3 +1,9 @@
+##2017-02-03 - Release 0.2.1
+###Summary
+
+Support puppetlabs apt module 2.3
+* Bump dependency on puppetlabs apt
+
 ##2017-02-02 - Release 0.1.6
 ###Summary
 
