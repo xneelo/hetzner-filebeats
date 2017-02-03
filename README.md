@@ -116,11 +116,12 @@ Multiple prospectors with multiple log files being exported.
    class { 'filebeats':
      prospectors              => [{ 'input_type' => 'log',
                                     'doc_type'   => 'log',
-                                    'paths'      =>['/var/log/auth.log']
+                                    'paths'      => ['/var/log/auth.log']
                                   },
                                   { 'input_type' => 'log',
                                     'doc_type'   => 'apache',
-                                    'paths'      =>['/var/log/apache2/access.log', '/var/log/apache2/error.log']
+                                    'paths'      => ['/var/log/apache2/access.log', '/var/log/apache2/error.log'],
+                                    'fields'     => {'level' => 'debug', 'review' => 1}
                                   }
                                  ]
      shield_username          => 'host',
@@ -141,6 +142,13 @@ filebeats::prospectors:
     paths:
       - '/var/log/my_app.log'
     doc_type: 'my_app'
+  - input_type: 'log'
+    paths:
+      - '/var/log/security.log'
+    doc_type: 'security'
+    fields:
+      level: 'debug'
+      review: 1
 ```
 
 
