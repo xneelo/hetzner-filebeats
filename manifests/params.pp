@@ -2,6 +2,7 @@
 
 class filebeats::params {
   $shield_username          = ''
+  $service_bootstrapped     = true
   $service_state            = 'running'
   $loadbalance              = false
   $shield_password          = ''
@@ -25,8 +26,8 @@ class filebeats::params {
                               }
   case $::osfamily {
     'Debian': {
-      $export_log_paths    = ['/var/log/*.log']
-      $config_path    = '/etc/filebeat'
+      $export_log_paths = ['/var/log/*.log']
+      $config_path      = '/etc/filebeat'
     }
     default: {
       fail('Could not determine default params for your Operating System')

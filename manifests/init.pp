@@ -30,6 +30,8 @@
 # * `log_settings`
 # A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'),
 #  to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
+# * `service_bootstrapped`
+# A boolean to turn on or off the filebeat service at boot ('false'/'true'), defaults to 'true'
 # * `service_state`
 # A string to describe the state of the filebeats service ('stopped'/'running'), defaults to 'running'
 # *`loadbalance`
@@ -72,6 +74,7 @@ class filebeats (
   $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
   $tls_certificate             = $filebeats::params::tls_certificate,
   $tls_certificate_key         = $filebeats::params::tls_certificate_key,
+  $service_bootstrapped        = $filebeats::params::service_bootstrapped,
   $service_state               = $filebeats::params::service_state,
   $loadbalance                 = $filebeats::params::loadbalance,
   $logstash_hosts              = $filebeats::params::logstash_hosts,
@@ -83,7 +86,8 @@ class filebeats (
   include ::filebeats::package
 
   class {'::filebeats::service':
-    service_state => $service_state,
+    service_bootstrapped => $service_bootstrapped,
+    service_state        => $service_state,
   }
 
   class{'::filebeats::config':

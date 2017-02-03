@@ -1,3 +1,8 @@
+##2017-02-03 - Release 0.2.2
+###Summary
+
+Add bootstrapping of filebeat service
+
 ##2017-02-03 - Release 0.2.1
 ###Summary
 
