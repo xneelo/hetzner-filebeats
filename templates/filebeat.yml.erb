@@ -14,9 +14,9 @@ filebeat:
 <% end -%>
 <% if prospector['fields'] -%>
       fields:
-   <% prospector['fields'].each do | field_name, field_value| -%>
-      <%= field_name.to_s %>: <%= field_value %>
-   <% end -%>
+<% prospector['fields'].each do | field_name, field_value| -%>
+        <%= field_name %>: <%= field_value %>
+<% end -%>
 <% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
