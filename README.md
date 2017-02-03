@@ -147,8 +147,8 @@ filebeats::prospectors:
       - '/var/log/security.log'
     doc_type: 'security'
     fields:
-      - level: 'debug'
-      - review: 1
+      level: 'debug'
+      review: 1
 ```
 
 

@@ -15,7 +15,7 @@ filebeat:
 <% if prospector['fields'] -%>
       fields:
    <% prospector['fields'].each do | field_name, field_value| -%>
-          <%= field_name.to_s %>: <%= field_value %>
+      <%= field_name.to_s %>: <%= field_value %>
    <% end -%>
 <% end -%>
 <% end -%>
