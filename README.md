@@ -22,10 +22,10 @@ puppet module install hetzner-filebeats
 ### Setup Requirements
 
 Puppet labs APT module
-  version 1.8.0 >=
+  version 2.3.0 >=
 
 Puppet labs STDLIB module
-  version 4.6.0 >=
+  version 4.6.0 >= 5.0.0
 
 ### Beginning with filebeats
 
@@ -76,6 +76,10 @@ A String that specifies a path to your hosts certificate key to use when connect
 *`log_settings`
 
 A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
+
+*`service_bootstrapped`
+
+A boolean to turn on or off the filebeat service at boot ('false'/'true'), defaults to 'true'
 
 *`service_state`
 
