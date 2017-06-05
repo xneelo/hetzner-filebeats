@@ -6,9 +6,6 @@ filebeat:
 <% prospector['paths'].each do |path| -%>
         - <%= path %>
 <% end -%>
-<% if prospector['exclude_lines'] -%>
-      exclude_lines: <%= prospector['exclude_lines'] %>
-<% end -%>
 <% if prospector['input_type'] -%>
       input_type: <%= prospector['input_type'] %>
 <% end -%>
@@ -17,6 +14,9 @@ filebeat:
 <% end -%>
 <% if prospector['include_lines'] -%>
       include_lines: <%= prospector['include_lines'] %>
+<% end -%>
+<% if prospector['exclude_lines'] -%>
+      exclude_lines: <%= prospector['exclude_lines'] %>
 <% end -%>
 <% if prospector['fields'] -%>
       fields:
