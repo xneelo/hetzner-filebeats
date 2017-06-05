@@ -118,9 +118,10 @@ Multiple prospectors with multiple log files being exported.
 
 ```
    class { 'filebeats':
-     prospectors              => [{ 'input_type' => 'log',
-                                    'doc_type'   => 'log',
-                                    'paths'      => ['/var/log/auth.log']
+     prospectors              => [{ 'input_type'    => 'log',
+                                    'doc_type'      => 'log',
+                                    'paths'         => ['/var/log/auth.log'],
+                                    'include_lines' => "['sshd','passwd','vigr']",
                                   },
                                   { 'input_type' => 'log',
                                     'doc_type'   => 'apache',
@@ -142,6 +143,7 @@ filebeats::prospectors:
     paths:
       - '/var/log/auth.log'
     doc_type: 'auth'
+    include_lines: ['sshd','passwd','vigr']
   - input_type: 'log'
     paths:
       - '/var/log/my_app.log'
