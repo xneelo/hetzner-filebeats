@@ -6,7 +6,7 @@ filebeat:
 <% prospector['paths'].each do |path| -%>
         - <%= path %>
 <% end -%>
-<% if prospector['input_type'] != '' -%>
+<% if prospector['input_type'] -%>
       input_type: <%= prospector['input_type'] %>
 <% end -%>
 <% if prospector['doc_type'] != '' -%>
@@ -15,12 +15,16 @@ filebeat:
 <% if prospector['include_lines'] -%>
       include_lines: <%= prospector['include_lines'] %>
 <% end -%>
+<% if prospector['exclude_lines'] -%>
+      exclude_lines: <%= prospector['exclude_lines'] %>
+<% end -%>
 <% if prospector['fields'] -%>
       fields:
-<% prospector['fields'].each do | field_name, field_value| -%>
-        <%= field_name %>: <%= field_value %>
+  <% prospector['fields'].each do |field| -%>
+        <%= field.keys[0] %>: <%= field.values[0] %>
+  <% end -%>
 <% end -%>
-<% end -%>
+
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output:
