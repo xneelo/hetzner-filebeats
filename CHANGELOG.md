@@ -1,3 +1,8 @@
+##2017-06-05 - Release 0.2.3
+###Summary
+
+Add include_line config option
+
 ##2017-02-03 - Release 0.2.2
 ###Summary
 
