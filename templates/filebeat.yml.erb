@@ -12,7 +12,7 @@ filebeat:
 <% if prospector['doc_type'] != '' -%>
       document_type: <%= prospector['doc_type'] %>
 <% end -%>
-<% if prospector['include_lines'] != '' -%>
+<% if prospector['include_lines'] != '' and ! prospector['include_lines'].nil? -%>
       include_lines: <%= prospector['include_lines'] %>
 <% end -%>
 <% if prospector['fields'] -%>
