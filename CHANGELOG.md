@@ -1,3 +1,8 @@
+##2017-06-05 - Release 0.2.4
+###Summary
+
+Add exclude_line config option
+
 ##2017-06-05 - Release 0.2.3
 ###Summary
 
