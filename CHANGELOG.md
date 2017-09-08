@@ -1,3 +1,8 @@
+##2017-09-17 - Release 0.2.5
+###Summary
+
+Remove unintended blank line in filebeats.yml
+
 ##2017-06-05 - Release 0.2.4
 ###Summary
 
