@@ -9,8 +9,8 @@ filebeat:
 <% if prospector['input_type'] -%>
       input_type: <%= prospector['input_type'] %>
 <% end -%>
-<% if prospector['doc_type'] != '' -%>
-      document_type: <%= prospector['doc_type'] %>
+<% if prospector['tags'] -%>
+      tags: [<%= prospector['tags'].map{|tag| "#{tag}"}.join(',') %>]
 <% end -%>
 <% if prospector['include_lines'] -%>
       include_lines: <%= prospector['include_lines'] %>
