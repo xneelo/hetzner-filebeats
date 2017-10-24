@@ -27,6 +27,10 @@ filebeat:
   <%- end -%>
 <% end -%>
 <% end -%>
+<% if @json_message_key -%>
+# Parse each line as JSON
+json.message_key: log
+<% end -%>
 registry_file: /var/lib/filebeat/registry
 output:
 <% if @logstash_hosts != [] -%>

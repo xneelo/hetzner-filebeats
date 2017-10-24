@@ -67,6 +67,7 @@
 class filebeats (
   $export_log_paths            = $filebeats::params::export_log_paths,
   $prospectors                 = $filebeats::params::prospectors,
+  $json_message_key	       = $filebeats::params::json_message_key,
   $shield_username             = $filebeats::params::shield_username,
   $shield_password             = $filebeats::params::shield_password,
   $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
@@ -93,6 +94,7 @@ class filebeats (
   class{'::filebeats::config':
     export_log_paths            => $export_log_paths,
     prospectors                 => $prospectors,
+    json_message_key		=> $json_message_key,
     shield_username             => $shield_username,
     shield_password             => $shield_password,
     elasticsearch_proxy_host    => $elasticsearch_proxy_host,
