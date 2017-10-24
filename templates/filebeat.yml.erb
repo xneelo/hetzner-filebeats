@@ -8,6 +8,9 @@ filebeat:
 <% prospector['paths'].each do |path| -%>
         - <%= path %>
 <% end -%>
+<% if prospector['doc_type'] != '' -%>
+      document_type: <%= prospector['doc_type'] %>
+<% end -%>
 <% if prospector['tags'] -%>
       tags: [<%= prospector['tags'].map{|tag| "#{tag}"}.join(',') %>]
 <% end -%>
@@ -19,9 +22,9 @@ filebeat:
 <% end -%>
 <% if prospector['fields'] -%>
       fields:
-  <%- prospector['fields'].each do |field| -%>
-        <%= field.keys[0] %>: '<%= field.values[0] %>'
-  <% end -%>
+  <%- prospector['fields'].each do |k,v| -%>
+        <%= k %>: '<%= v %>'
+  <%- end -%>
 <% end -%>
 <% end -%>
 registry_file: /var/lib/filebeat/registry
