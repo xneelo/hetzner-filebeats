@@ -93,7 +93,6 @@ class filebeats (
   class{'::filebeats::config':
     export_log_paths            => $export_log_paths,
     prospectors                 => $prospectors,
-    json_message_key		=> $json_message_key,
     shield_username             => $shield_username,
     shield_password             => $shield_password,
     elasticsearch_proxy_host    => $elasticsearch_proxy_host,
