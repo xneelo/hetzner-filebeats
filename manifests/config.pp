@@ -8,7 +8,6 @@
 class filebeats::config (
   $export_log_paths,
   $prospectors,
-  $json_message_key,
   $shield_username,
   $shield_password,
   $elasticsearch_proxy_host,
