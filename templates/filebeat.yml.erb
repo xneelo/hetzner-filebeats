@@ -1,13 +1,12 @@
 filebeat:
   prospectors:
 <% @prospectors_array.each do | prospector | -%>
-    -
+<% if prospector['input_type'] -%>
+    - input_type: <%= prospector['input_type'] %>
+<% end -%>
       paths:
 <% prospector['paths'].each do |path| -%>
         - <%= path %>
-<% end -%>
-<% if prospector['input_type'] -%>
-      input_type: <%= prospector['input_type'] %>
 <% end -%>
 <% if prospector['tags'] -%>
       tags: [<%= prospector['tags'].map{|tag| "#{tag}"}.join(',') %>]
@@ -20,12 +19,12 @@ filebeat:
 <% end -%>
 <% if prospector['fields'] -%>
       fields:
-  <% prospector['fields'].each do |field| -%>
-        <%= field.keys[0] %>: <%= field.values[0] %>
+  <%- prospector['fields'].each do |field| -%>
+        <%= field.keys[0] %>: '<%= field.values[0] %>'
   <% end -%>
 <% end -%>
 <% end -%>
-  registry_file: /var/lib/filebeat/registry
+registry_file: /var/lib/filebeat/registry
 output:
 <% if @logstash_hosts != [] -%>
   logstash:
