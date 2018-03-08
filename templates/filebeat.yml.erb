@@ -24,6 +24,12 @@ filebeat:
         <%= field.keys[0] %>: <%= field.values[0] %>
   <% end -%>
 <% end -%>
+<% if prospector['close_removed'] -%>
+      close_removed: true
+<% end -%>
+<% if @close_removed_for_all -%>
+      close_removed: true
+<% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output:

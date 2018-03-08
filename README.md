@@ -101,6 +101,9 @@ A string that specifies the index to use for the logstash output, defaults to '[
 
 A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 
+*`close_removed_for_all`
+A boolean to turn on close_removed parameter for all prospectors
+
 ## Example
 
 Auth.log being exported with only shield login details specified.
@@ -128,6 +131,7 @@ Multiple prospectors with multiple log files being exported.
                                     'paths'         => ['/var/log/apache2/access.log', '/var/log/apache2/error.log'],
                                     'fields'        => {'level' => 'debug', 'review' => 1},
                                     'exclude_lines' => "['warning'']",
+                                    'close_removed' => true,
                                   }
                                  ]
      shield_username          => 'host',
@@ -157,6 +161,7 @@ filebeats::prospectors:
     fields:
       level: 'debug'
       review: 1
+    close_removed: true
 ```
 
 

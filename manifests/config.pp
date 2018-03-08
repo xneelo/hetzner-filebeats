@@ -20,6 +20,7 @@ class filebeats::config (
   $logstash_hosts,
   $logstash_index,
   $elasticsearch_index,
+  $close_removed_for_all,
 ){
   $config_path = $filebeats::params::config_path
 
