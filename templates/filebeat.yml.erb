@@ -26,11 +26,11 @@ filebeat:
         <%= k %>: '<%= v %>'
   <%- end -%>
 <% end -%>
-<% if @json_message_key != '' -%>
+<% if prospector['json_message_key'] -%>
       # Parse each line as JSON
       json.message_key: <%= prospector['json_message_key'] %>
 <% end -%>
-<% if @json_keys_under_root != '' -%>
+<% if prospector['json_keys_under_root'] -%>
       json.keys_under_root: <%= prospector['json_keys_under_root'] %>
 <% end -%>
 <% end -%>
