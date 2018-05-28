@@ -26,60 +26,22 @@ filebeat:
 <% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
-output:
-<% if @logstash_hosts != [] -%>
-  logstash:
-    hosts:
-<% @logstash_hosts.each do | host | -%>
-        - "<%= host %>"
-<% end -%>
+output.logstash:
+  hosts: [<%= @logstash_hosts %>]
 <% if @loadbalance -%>
-    loadbalance: true
+  loadbalance: true
 <% end -%>
 <% if @logstash_index != '' -%>
-    index: <%= @logstash_index %>
+  index: <%= @logstash_index %>
 <% end -%>
-<% if @tls_certificate_authorities != [] -%>
-    tls:
+<% if @ssl_certificate_authorities != [] -%>
+  ssl.certificate_authorities: [<%= @ssl_certificate_authorities %>"
 <% end -%>
-<% if @tls_certificate_authorities != [] -%>
-      certificate_authorities:
-<% @tls_certificate_authorities.each do | authoritory | -%>
-        - "<%= authoritory %>"
+<% if @ssl_certificate != '' -%>
+  ssl.certificate: <%= @ssl_certificate %>
 <% end -%>
-<% end -%>
-<% if @tls_certificate != '' -%>
-      certificate: <%= @tls_certificate %>
-<% end -%>
-<% if @tls_certificate_key != '' -%>
-      certificate_key: <%= @tls_certificate_key %>
-<% end -%>
-<% else-%>
-  elasticsearch:
-    hosts: ["<%= @elasticsearch_proxy_host %>"]
-    protocol: "<%= @elasticsearch_protocol%>"
-<% if @shield_username != '' -%>
-    username: "<%= @shield_username %>"
-    password: "<%= @shield_password %>"
-<% end -%>
-<% if @elasticsearch_index != '' -%>
-    index: <%= @elasticsearch_index %>
-<% end -%>
-<% if @tls_certificate_authorities != [] -%>
-    tls:
-<% end -%>
-<% if @tls_certificate_authorities != [] -%>
-      certificate_authorities:
-<% @tls_certificate_authorities.each do | authoritory | -%>
-        - "<%= authoritory %>"
-<% end -%>
-<% end -%>
-<% if @tls_certificate != '' -%>
-      certificate: <%= @tls_certificate %>
-<% end -%>
-<% if @tls_certificate_key != '' -%>
-      certificate_key: <%= @tls_certificate_key %>
-<% end -%>
+<% if @ssl_certificate_key != '' -%>
+  ssl.certificate_key: <%= @ssl_certificate_key %>
 <% end -%>
 <% if !@logging.empty? -%>
 logging:

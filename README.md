@@ -61,15 +61,19 @@ If left empty it will default to exporting logs to your local host on port 9200.
 
 A string containing the protocol used by filebeats, defaults to http. 
 
-*`tls_certificate_authorities`
+*`use_ssl`
+
+Boolean option to enable SSL for output
+
+*`ssl_certificate_authorities`
 
 An array of Strings that specifies paths to Certificate authority files.
 
-*`tls_certificate`
+*`ssl_certificate`
 
 A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
 
-*`tls_certificate_key`
+*`ssl_certificate_key`
 
 A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 
