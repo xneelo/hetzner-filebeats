@@ -5,7 +5,7 @@ class filebeats::package {
     'Debian': {
       package {'filebeat':
         ensure  => present,
-        require => Class['::elastic_stack']
+        require => Class['::elastic_stack::repo']
       }
     }
     default: {
