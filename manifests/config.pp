@@ -12,6 +12,7 @@ class filebeats::config (
   $shield_password,
   $elasticsearch_proxy_host,
   $elasticsearch_protocol,
+  $use_ssl,
   $ssl_certificate_authorities,
   $ssl_certificate,
   $ssl_certificate_key,
