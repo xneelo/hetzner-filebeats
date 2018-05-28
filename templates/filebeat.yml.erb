@@ -41,7 +41,7 @@ output.logstash:
   ssl.certificate: <%= @ssl_certificate %>
 <% end -%>
 <% if @ssl_certificate_key != '' -%>
-  ssl.certificate_key: <%= @ssl_certificate_key %>
+  ssl.key: <%= @ssl_certificate_key %>
 <% end -%>
 <% if !@logging.empty? -%>
 logging:
