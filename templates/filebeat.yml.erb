@@ -27,7 +27,7 @@ filebeat:
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output.logstash:
-  hosts: [<%= @logstash_hosts %>]
+  hosts: <%= @logstash_hosts %>
 <% if @loadbalance -%>
   loadbalance: true
 <% end -%>
@@ -35,7 +35,7 @@ output.logstash:
   index: <%= @logstash_index %>
 <% end -%>
 <% if @ssl_certificate_authorities != [] -%>
-  ssl.certificate_authorities: [<%= @ssl_certificate_authorities %>"
+  ssl.certificate_authorities: <%= @ssl_certificate_authorities %>
 <% end -%>
 <% if @ssl_certificate != '' -%>
   ssl.certificate: <%= @ssl_certificate %>
