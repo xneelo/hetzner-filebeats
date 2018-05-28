@@ -28,7 +28,6 @@ filebeat:
   registry_file: /var/lib/filebeat/registry
 output.logstash:
   hosts: <%= @logstash_hosts %>
-
 <% if @loadbalance -%>
   loadbalance: true
 <% end -%>
