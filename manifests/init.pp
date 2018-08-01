@@ -83,6 +83,7 @@ class filebeats (
   $elasticsearch_index         = $filebeats::params::elasticsearch_index,
 ) inherits ::filebeats::params {
 
+  include ::elastic_stack::repo
   include ::filebeats::package
 
   class {'::filebeats::service':
