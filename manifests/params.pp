@@ -24,6 +24,7 @@ class filebeats::params {
                                 name  => 'filebeats.log',
                                 rotateeverybytes => 10485760,
                               }
+  $close_removed_for_all    = false
   case $::osfamily {
     'Debian': {
       $export_log_paths = ['/var/log/*.log']

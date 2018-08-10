@@ -81,6 +81,7 @@ class filebeats (
   $log_settings                = {},
   $logstash_index              = $filebeats::params::logstash_index,
   $elasticsearch_index         = $filebeats::params::elasticsearch_index,
+  $close_removed_for_all       = $filebeats::params::close_removed_for_all,
 ) inherits ::filebeats::params {
 
   include ::elastic_stack::repo
@@ -106,6 +107,7 @@ class filebeats (
     logstash_hosts              => $logstash_hosts,
     logstash_index              => $logstash_index,
     elasticsearch_index         => $elasticsearch_index,
+    close_removed_for_all       => $close_removed_for_all,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']
