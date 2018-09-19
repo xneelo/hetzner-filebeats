@@ -25,6 +25,7 @@ filebeat:
   <% prospector['fields'].each do |k,v| -%>
         <%= k %>: '<%= v %>'
   <% end -%>
+<% end -%>
 <% if prospector['json_keys_under_root'] != '' -%>
       json.keys_under_root: <%= prospector['json_keys_under_root'] %>
 <% end -%>
@@ -36,7 +37,6 @@ filebeat:
 <% end -%>
 <% if prospector['json_message_key'] != '' -%>
       json.message_key: <%= prospector['json_message_key'] %>
-<% end -%>
 <% end -%>
 
 <% end -%>
