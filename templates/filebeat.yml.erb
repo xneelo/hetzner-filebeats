@@ -38,7 +38,6 @@ filebeat:
 <% if prospector['json_message_key'] -%>
       json.message_key: <%= prospector['json_message_key'] %>
 <% end -%>
-
 <% end -%>
   registry_file: /var/lib/filebeat/registry
 output.logstash:
