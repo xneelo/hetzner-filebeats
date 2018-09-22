@@ -169,7 +169,6 @@ filebeats::prospectors:
     json_overwrite_keys: true
     json_add_error_key: true
     json_message_key: 'log'
-    
 ```
 
 

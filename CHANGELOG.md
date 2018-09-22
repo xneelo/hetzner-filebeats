@@ -1,6 +1,7 @@
-##2018-08-16 - Release 0.2.6
+##2018-08-16 - Release 0.3.0
 ###Summary
 
+Update syntax for SSL from tls to ssl
 Add support for prospector fields
 * tags
 * Support JSON messages with the following options
