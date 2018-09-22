@@ -161,6 +161,15 @@ filebeats::prospectors:
     fields:
       level: 'debug'
       review: 1
+  - input_type: 'log'
+    paths:
+      - '/var/log/app.json'
+    tags:  ['json']
+    json_keys_under_root: true
+    json_overwrite_keys: true
+    json_add_error_key: true
+    json_message_key: 'log'
+    
 ```
 
 

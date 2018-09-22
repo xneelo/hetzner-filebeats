@@ -1,7 +1,15 @@
-##2017-09-17 - Release 0.2.5
+##2018-08-16 - Release 0.2.5
 ###Summary
 
-Remove unintended blank line in filebeats.yml
+Add support for prospector fields
+* tags
+* Support JSON messages with the following options
+*   json.keys_under_root
+*   json.add_error_key
+*   json.message_key
+*   json.add_error_key
+
+Credit to https://github.com/hundredacres
 
 ##2017-06-05 - Release 0.2.4
 ###Summary
