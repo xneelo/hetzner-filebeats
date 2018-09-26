@@ -40,23 +40,68 @@ filebeat:
 <% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
+
+<% if @logstash_hosts != [] -%>
 output.logstash:
   hosts: <%= @logstash_hosts %>
-<% if @loadbalance -%>
+<% if @logstash_loadbalance -%>
   loadbalance: true
+<% end -%>
+<% if @logstash_worker > 1 -%>
+  worker: <%= @logstash_worker %>
 <% end -%>
 <% if @logstash_index != '' -%>
   index: <%= @logstash_index %>
 <% end -%>
-<% if @ssl_certificate_authorities != [] -%>
-  ssl.certificate_authorities: <%= @ssl_certificate_authorities %>
+<% if @logstash_ssl_certificate_authorities != [] -%>
+  ssl.certificate_authorities: <%= @logstash_ssl_certificate_authorities %>
 <% end -%>
-<% if @ssl_certificate != '' -%>
-  ssl.certificate: <%= @ssl_certificate %>
+<% if @logstash_ssl_certificate != '' -%>
+  ssl.certificate: <%= @logstash_ssl_certificate %>
 <% end -%>
-<% if @ssl_certificate_key != '' -%>
-  ssl.key: <%= @ssl_certificate_key %>
+<% if @logstash_ssl_certificate_key != '' -%>
+  ssl.key: <%= @logstash_ssl_certificate_key %>
 <% end -%>
+<% end -%>
+
+<% if @elasticsearch_hosts != [] -%>
+output.elasticsearch:
+  hosts: <%= @elasticsearch_hosts %>
+<% if @elasticsearch_index != '' -%>
+  index: <%= @elasticsearch_index %>
+<% end -%>
+<% if @elasticsearch_protocol != '' -%>
+   protocol: <%= @elasticsearch_protocol %>
+<% end -%>
+<% if @elasticsearch_username != '' -%>
+ username: <%= @elasticsearch_username %>
+<% end -%>
+<% if @elasticsearch_password != '' -%>
+ password: <%= @elasticsearch_password %>
+<% end -%>
+<% if @elasticsearch_ssl_certificate_authorities != [] -%>
+  ssl.certificate_authorities: <%= @elasticsearch_ssl_certificate_authorities %>
+<% end -%>
+<% if @elasticsearch_ssl_certificate != '' -%>
+  ssl.certificate: <%= @elasticsearch_ssl_certificate %>
+<% end -%>
+<% if @elasticsearch_ssl_certificate_key != '' -%>
+  ssl.key: <%= @elasticsearch_ssl_certificate_key %>
+<% end -%>
+<% if @elasticsearch_template_enabled -%>
+   template.enabled: true
+<% end -%>
+<% if @elasticsearch_template_name != '' -%>
+  template.name: <%= @elasticsearch_template_name %>
+<% end -%>
+<% if @elasticsearch_template_overwrite -%>
+  template.overwrite: true
+<% end -%>
+<% if @elasticsearch_template_path != '' -%>
+  template.path: <%= @elasticsearch_template_path %>
+<% end -%>
+<% end -%>
+
 <% if !@logging.empty? -%>
 logging:
   level: <%= @logging['level'] %>
