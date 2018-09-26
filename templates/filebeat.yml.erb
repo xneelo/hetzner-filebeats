@@ -40,8 +40,8 @@ filebeat:
 <% end -%>
 <% end -%>
   registry_file: /var/lib/filebeat/registry
-
 <% if @logstash_hosts != [] -%>
+
 output.logstash:
   hosts: <%= @logstash_hosts %>
 <% if @logstash_loadbalance -%>
@@ -63,8 +63,8 @@ output.logstash:
   ssl.key: <%= @logstash_ssl_certificate_key %>
 <% end -%>
 <% end -%>
-
 <% if @elasticsearch_hosts != [] -%>
+
 output.elasticsearch:
   hosts: <%= @elasticsearch_hosts %>
 <% if @elasticsearch_index != '' -%>
