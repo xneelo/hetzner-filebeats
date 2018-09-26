@@ -44,7 +44,7 @@ filebeat:
 <% if @logstash_hosts != [] -%>
 output.logstash:
   hosts: <%= @logstash_hosts %>
-<% if @loadbalance -%>
+<% if @logstash_loadbalance -%>
   loadbalance: true
 <% end -%>
 <% if @logstash_worker > 1 -%>
@@ -114,6 +114,5 @@ logging:
     path: <%= @logging['path'] %>
     name: <%= @logging['name'] %>
     keepfiles: <%= @logging['keepfiles'] %>
-<% end -%>
 <% end -%>
 <% end -%>
