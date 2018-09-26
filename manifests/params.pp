@@ -5,9 +5,9 @@ class filebeats::params {
   $elasticsearch_index                       = ''
   $elasticsearch_password                    = ''
   $elasticsearch_protocol                    = 'http'
-  $elasticsearch_ssl_certificate             =  ''
+  $elasticsearch_ssl_certificate             = ''
   $elasticsearch_ssl_certificate_authorities = []
-  $elasticsearch_ssl_certificate_key         =  ''
+  $elasticsearch_ssl_certificate_key         = ''
   $elasticsearch_template_enabled            = false
   $elasticsearch_template_name               = ''
   $elasticsearch_template_overwrite          = false
@@ -17,9 +17,9 @@ class filebeats::params {
   $logstash_index                            = ''
   $logstash_loadbalance                      = false
   $logstash_worker                           = 1
-  $logstash_ssl_certificate                  =  ''
+  $logstash_ssl_certificate                  = ''
   $logstash_ssl_certificate_authorities      = []
-  $logstash_ssl_certificate_key              =  ''
+  $logstash_ssl_certificate_key              = ''
   $prospectors                               = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'
