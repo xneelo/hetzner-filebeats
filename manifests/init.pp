@@ -21,11 +21,11 @@
 # If left empty it will default to exporting logs to your local host on port 9200.
 # * `elasticsearch_protocol`
 # A string containing the protocl used by filebeats to send logs.
-# * `tls_certificate_authorities`
+# * `ssl_certificate_authorities`
 # An array of Strings that specifies paths to Certificate authority files.
-# * `tls_certificate`
+# * `ssl_certificate`
 # A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
-# * `tls_certificate_key`
+# * `ssl_certificate_key`
 # A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 # * `log_settings`
 # A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'),
@@ -71,9 +71,10 @@ class filebeats (
   $shield_password             = $filebeats::params::shield_password,
   $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
   $elasticsearch_protocol      = $filebeats::params::elasticsearch_protocol,
-  $tls_certificate_authorities = $filebeats::params::tls_certificate_authorities,
-  $tls_certificate             = $filebeats::params::tls_certificate,
-  $tls_certificate_key         = $filebeats::params::tls_certificate_key,
+  $use_ssl                     = $filebeats::params::use_ssl,
+  $ssl_certificate_authorities = $filebeats::params::ssl_certificate_authorities,
+  $ssl_certificate             = $filebeats::params::ssl_certificate,
+  $ssl_certificate_key         = $filebeats::params::ssl_certificate_key,
   $service_bootstrapped        = $filebeats::params::service_bootstrapped,
   $service_state               = $filebeats::params::service_state,
   $loadbalance                 = $filebeats::params::loadbalance,
@@ -83,6 +84,7 @@ class filebeats (
   $elasticsearch_index         = $filebeats::params::elasticsearch_index,
 ) inherits ::filebeats::params {
 
+  include ::elastic_stack::repo
   include ::filebeats::package
 
   class {'::filebeats::service':
@@ -97,9 +99,10 @@ class filebeats (
     shield_password             => $shield_password,
     elasticsearch_proxy_host    => $elasticsearch_proxy_host,
     elasticsearch_protocol      => $elasticsearch_protocol,
-    tls_certificate_authorities => $tls_certificate_authorities,
-    tls_certificate             => $tls_certificate,
-    tls_certificate_key         => $tls_certificate_key,
+    use_ssl                     => $use_ssl,
+    ssl_certificate_authorities => $ssl_certificate_authorities,
+    ssl_certificate             => $ssl_certificate,
+    ssl_certificate_key         => $ssl_certificate_key,
     log_settings                => $log_settings,
     loadbalance                 => $loadbalance,
     logstash_hosts              => $logstash_hosts,

@@ -8,15 +8,15 @@
   "project_page": "https://github.com/hetznerZA/hetzner-filebeats",
   "issues_url": "https://github.com/hetznerZA/hetzner-filebeats/issues",
   "operatingsystem_support": [
-    {"operatingsystem": "Debian","operatingsystemrelease": ["7"]}
+    {"operatingsystem": "Debian","operatingsystemrelease": ["8"]}
   ],
   "requirements": [
-    {"name": "puppet","version_requirement": "3.x"},
-    {"name": "filebeats","version_requirement": "1.2.x"}
+    {"name": "puppet","version_requirement": "4.x"},
+    {"name": "filebeats","version_requirement": "5.6.x"}
   ],
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 4.6.0 < 5.0.0"},
-    {"name":"puppetlabs-apt","version_requirement":">= 2.3.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.13.0 < 5.0.0"},
+    {"name":"elastic-elastic_stack","version_requirement":">= 6.0.2"}
   ],
   "data_provider": null
 }
