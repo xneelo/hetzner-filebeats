@@ -1,14 +1,17 @@
 ##2018-08-16 - Release 0.3.0
 ###Summary
 
-Update syntax for SSL from tls to ssl
-Add support for prospector fields
-* tags
-* Support JSON messages with the following options
-*   json.keys_under_root
-*   json.add_error_key
-*   json.message_key
-*   json.add_error_key
+Update both logstash output and elasticsearch output for filebeat 5.X syntax
+* Rename params to reflect which filebeat output they affect
+* Typecast all params
+* Expand elasticsearch output support with templates and ssl
+* Add support for prospector fields
+*   tags
+*   Support JSON messages with the following options
+*     json.keys_under_root
+*     json.add_error_key
+*     json.message_key
+*     json.add_error_key
 
 Credit to https://github.com/hundredacres
 
