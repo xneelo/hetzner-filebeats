@@ -12,10 +12,10 @@
 # An array of Strings that specifies which logs the filebeats application must export.
 # * `prospectors`
 # An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
-# * `shield_username`
-# The username filebeats should use to authenticate should your cluster make use of shield
-# * `shield_password`
-# The password filebeats should use to authenticate should your cluster make use of shield
+# * `elasticsearch_username`
+# The username filebeats should use to authenticate should your cluster make use of elasticsearch
+# * `elasticsearch_password`
+# The password filebeats should use to authenticate should your cluster make use of elasticsearch
 # * `elasticsearch_proxy_host`
 # A string containing the hostname of your proxy host used for load balancing your cluster.
 # If left empty it will default to exporting logs to your local host on port 9200.
@@ -49,8 +49,8 @@
 # @example
 #    class { 'filebeats':
 #      export_log_paths         => ['/var/log/auth.log'],
-#      shield_username          => 'host',
-#      shield_password          => 'secret',
+#      elasticsearch_username          => 'host',
+#      elasticsearch_password          => 'secret',
 #      elasticsearch_proxy_host => 'elasticsearchproxy.myserver.com',
 #    }
 #
@@ -65,23 +65,30 @@
 # Copyright 2016 Henlu Starke, unless otherwise noted.
 #
 class filebeats (
-  $export_log_paths            = $filebeats::params::export_log_paths,
-  $prospectors                 = $filebeats::params::prospectors,
-  $shield_username             = $filebeats::params::shield_username,
-  $shield_password             = $filebeats::params::shield_password,
-  $elasticsearch_proxy_host    = $filebeats::params::elasticsearch_proxy_host,
-  $elasticsearch_protocol      = $filebeats::params::elasticsearch_protocol,
-  $use_ssl                     = $filebeats::params::use_ssl,
-  $ssl_certificate_authorities = $filebeats::params::ssl_certificate_authorities,
-  $ssl_certificate             = $filebeats::params::ssl_certificate,
-  $ssl_certificate_key         = $filebeats::params::ssl_certificate_key,
-  $service_bootstrapped        = $filebeats::params::service_bootstrapped,
-  $service_state               = $filebeats::params::service_state,
-  $loadbalance                 = $filebeats::params::loadbalance,
-  $logstash_hosts              = $filebeats::params::logstash_hosts,
-  $log_settings                = {},
-  $logstash_index              = $filebeats::params::logstash_index,
-  $elasticsearch_index         = $filebeats::params::elasticsearch_index,
+  $elasticsearch_hosts                       = $filebeats::params::elasticsearch_hosts,
+  $elasticsearch_index                       = $filebeats::params::elasticsearch_index,
+  $elasticsearch_password                    = $filebeats::params::elasticsearch_password,
+  $elasticsearch_protocol                    = $filebeats::params::elasticsearch_protocol,
+  $elasticsearch_ssl_certificate             = $filebeats::params::elasticsearch_ssl_certificate,
+  $elasticsearch_ssl_certificate_authorities = $filebeats::params::elasticsearch_ssl_certificate_authorities,
+  $elasticsearch_ssl_certificate_key         = $filebeats::params::elasticsearch_ssl_certificate_key,
+  $elasticsearch_template_enabled            = $filebeats::params::elasticsearch_template_enabled,
+  $elasticsearch_template_name               = $filebeats::params::elasticsearch_template_name,
+  $elasticsearch_template_overwrite          = $filebeats::params::elasticsearch_template_overwrite,
+  $elasticsearch_template_path               = $filebeats::params::elasticsearch_template_path,
+  $elasticsearch_username                    = $filebeats::params::elasticsearch_username,
+  $export_log_paths                          = $filebeats::params::export_log_paths,
+  $log_settings                              = {},
+  $logstash_hosts                            = $filebeats::params::logstash_hosts,
+  $logstash_index                            = $filebeats::params::logstash_index,
+  $logstash_loadbalance                      = $filebeats::params::logstash_loadbalance,
+  $logstash_ssl_certificate                  = $filebeats::params::logstash_ssl_certificate,
+  $logstash_ssl_certificate_authorities      = $filebeats::params::logstash_ssl_certificate_authorities,
+  $logstash_ssl_certificate_key              = $filebeats::params::logstash_ssl_certificate_key,
+  $logstash_worker                           = $filebeats::params::logstash_worker,
+  $prospectors                               = $filebeats::params::prospectors,
+  $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
+  $service_state                             = $filebeats::params::service_state,
 ) inherits ::filebeats::params {
 
   include ::elastic_stack::repo
@@ -93,21 +100,28 @@ class filebeats (
   }
 
   class{'::filebeats::config':
-    export_log_paths            => $export_log_paths,
-    prospectors                 => $prospectors,
-    shield_username             => $shield_username,
-    shield_password             => $shield_password,
-    elasticsearch_proxy_host    => $elasticsearch_proxy_host,
-    elasticsearch_protocol      => $elasticsearch_protocol,
-    use_ssl                     => $use_ssl,
-    ssl_certificate_authorities => $ssl_certificate_authorities,
-    ssl_certificate             => $ssl_certificate,
-    ssl_certificate_key         => $ssl_certificate_key,
-    log_settings                => $log_settings,
-    loadbalance                 => $loadbalance,
-    logstash_hosts              => $logstash_hosts,
-    logstash_index              => $logstash_index,
-    elasticsearch_index         => $elasticsearch_index,
+    elasticsearch_hosts                       => $elasticsearch_hosts,
+    elasticsearch_index                       => $elasticsearch_index,
+    elasticsearch_password                    => $elasticsearch_password,
+    elasticsearch_protocol                    => $elasticsearch_protocol,
+    elasticsearch_ssl_certificate             => $ssl_certificate,
+    elasticsearch_ssl_certificate_authorities => $ssl_certificate_authorities,
+    elasticsearch_ssl_certificate_key         => $ssl_certificate_key,
+    elasticsearch_template_enabled            => $elasticsearch_template_enabled,
+    elasticsearch_template_name               => $elasticsearch_template_name,
+    elasticsearch_template_overwrite          => $elasticsearch_template_overwrite,
+    elasticsearch_template_path               => $elasticsearch_template_path,
+    elasticsearch_username                    => $elasticsearch_username,
+    export_log_paths                          => $export_log_paths,
+    log_settings                              => $log_settings,
+    logstash_hosts                            => $logstash_hosts,
+    logstash_index                            => $logstash_index,
+    logstash_loadbalance                      => $logstash_loadbalance,
+    logstash_ssl_certificate                  => $logstash_ssl_certificate,
+    logstash_ssl_certificate_authorities      => $logstash_ssl_certificate_authorities,
+    logstash_ssl_certificate_key              => $logstash_ssl_certificate_key,
+    logstash_worker                           => $logstash_worker,
+    prospectors                               => $prospectors,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']
