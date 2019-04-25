@@ -13,7 +13,7 @@
 
 ## Description
 
-Very simple puppet module to install and configure elasticsearch filebeat 5.X
+Very simple puppet module to install and configure elasticsearch filebeats
 
 ## Setup
 
