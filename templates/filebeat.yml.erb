@@ -2,7 +2,7 @@ filebeat:
   prospectors:
 <% @prospectors_array.each do | prospector | -%>
 <% if prospector['input_type'] -%>
-    - input_type: <%= prospector['input_type'] %>
+    - type: <%= prospector['input_type'] %>
 <% end -%>
       paths:
 <% prospector['paths'].each do |path| -%>
