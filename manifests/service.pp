@@ -5,8 +5,8 @@ class filebeats::service (
   $service_state,
 ) {
   service {'filebeat':
-    enable  => $service_bootstrapped,
     ensure  => $service_state,
+    enable  => $service_bootstrapped,
     require => Package['filebeat'],
   }
 }
