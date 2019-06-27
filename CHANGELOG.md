@@ -1,3 +1,10 @@
+##2019-06-27 - Release 1.0.1
+###Summary
+
+Add support for the following config options to logstash output
+* ttl
+* bulk_max_size
+
 ##2019-04-25 - Release 1.0.0
 ###Summary
 
