@@ -40,6 +40,14 @@
 # An array of strings that specifies remote hosts to use for logstash outputs, e.g ['localhost:5044']
 # *`logstash_index`
 # A string that specifies the index to use for the logstash output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+# *`logstash_bulk_max_size`
+# A number representing the maximum number of events to bulk in a single Logstash request, e.g 2048
+#   Setting this to zero or negative disables the splitting of batches.
+# *`logstash_ttl`
+# A string that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
+#  see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
+#  NOTE: this option explicitly disables pipelining, it is not cmpatibly with the async logstash client
+#  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 # *`elasticsearch_index`
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 #
@@ -80,11 +88,13 @@ class filebeats (
   $export_log_paths                          = $filebeats::params::export_log_paths,
   $log_settings                              = {},
   $logstash_hosts                            = $filebeats::params::logstash_hosts,
+  $logstash_bulk_max_size                    = $filebeats::params::logstash_bulk_max_size,
   $logstash_index                            = $filebeats::params::logstash_index,
   $logstash_loadbalance                      = $filebeats::params::logstash_loadbalance,
   $logstash_ssl_certificate                  = $filebeats::params::logstash_ssl_certificate,
   $logstash_ssl_certificate_authorities      = $filebeats::params::logstash_ssl_certificate_authorities,
   $logstash_ssl_certificate_key              = $filebeats::params::logstash_ssl_certificate_key,
+  $logstash_ttl                              = $filebeats::params::logstash_ttl,
   $logstash_worker                           = $filebeats::params::logstash_worker,
   $prospectors                               = $filebeats::params::prospectors,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
@@ -115,11 +125,13 @@ class filebeats (
     export_log_paths                          => $export_log_paths,
     log_settings                              => $log_settings,
     logstash_hosts                            => $logstash_hosts,
+    logstash_bulk_max_size                    => $logstash_bulk_max_size,
     logstash_index                            => $logstash_index,
     logstash_loadbalance                      => $logstash_loadbalance,
     logstash_ssl_certificate                  => $logstash_ssl_certificate,
     logstash_ssl_certificate_authorities      => $logstash_ssl_certificate_authorities,
     logstash_ssl_certificate_key              => $logstash_ssl_certificate_key,
+    logstash_ttl                              => $logstash_ttl,
     logstash_worker                           => $logstash_worker,
     prospectors                               => $prospectors,
   }

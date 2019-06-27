@@ -50,6 +50,13 @@ output.logstash:
 <% if @logstash_worker > 1 -%>
   worker: <%= @logstash_worker %>
 <% end -%>
+<% if @logstash_bulk_max_size != 2048 -%>
+  bulk_max_size: <%= @logstash_bulk_max_size %>
+<% end -%>
+<% if @logstash_ttl != '' -%>
+  ttl: <%= @logstash_ttl %>
+  pipelining: 0
+<% end -%>
 <% if @logstash_index != '' -%>
   index: <%= @logstash_index %>
 <% end -%>
