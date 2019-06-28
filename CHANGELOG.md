@@ -1,3 +1,15 @@
+##2019-06-28 - Release 1.0.3
+###Summary
+
+NFR: Fix README format
+
+##2019-06-27 - Release 1.0.2
+###Summary
+
+Add support for the following config options to logstash output
+* ttl
+* bulk_max_size
+
 ##2019-04-25 - Release 1.0.0
 ###Summary
 
