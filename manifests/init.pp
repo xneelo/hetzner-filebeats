@@ -46,7 +46,7 @@
 # *`logstash_ttl`
 # A string that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
 #  see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
-#  NOTE: this option explicitly disables pipelining, it is not cmpatibly with the async logstash client
+#  NOTE: this option explicitly disables pipelining, it is not compatible with the async logstash client
 #  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 # *`elasticsearch_index`
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.

@@ -50,9 +50,6 @@ output.logstash:
 <% if @logstash_worker > 1 -%>
   worker: <%= @logstash_worker %>
 <% end -%>
-<% if @logstash_bulk_max_size != 2048 -%>
-  bulk_max_size: <%= @logstash_bulk_max_size %>
-<% end -%>
 <% if @logstash_ttl != '' -%>
   ttl: <%= @logstash_ttl %>
   pipelining: 0
@@ -69,6 +66,7 @@ output.logstash:
 <% if @logstash_ssl_certificate_key != '' -%>
   ssl.key: <%= @logstash_ssl_certificate_key %>
 <% end -%>
+  bulk_max_size: <%= @logstash_bulk_max_size %>
 <% end -%>
 <% if @elasticsearch_hosts != [] -%>
 
