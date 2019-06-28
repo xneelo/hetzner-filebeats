@@ -1,4 +1,9 @@
-##2019-06-27 - Release 1.0.1
+##2019-06-28 - Release 1.0.3
+###Summary
+
+NFR: Fix README format
+
+##2019-06-27 - Release 1.0.2
 ###Summary
 
 Add support for the following config options to logstash output
