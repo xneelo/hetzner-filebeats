@@ -13,7 +13,7 @@
 
 ## Description
 
-Very simple puppet module to install and configure elasticsearch filebeat 5.X
+Very simple puppet module to install and configure elasticsearch filebeats
 
 ## Setup
 
@@ -35,71 +35,83 @@ Use puppet module install function to install module and simply include it from 
 
 The module can be called with the following parameters:
 
-*`prospectors` OPTIONAL
+#`prospectors` OPTIONAL
 
 An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
 This value should be used if you wish to have more than one prospector.
 
-*`logstash_hosts`
+#`logstash_hosts`
 
 An array of strings that specifies remote hosts to use for logstash outputs, e.g ['localhost:5044']
 If left empty then all other logstash options are ignored
 
-*`logstash_index`
+#`logstash_bulk_max_size`
+
+A Number representing the maximum number of events to bulk in a single Logstash request, e.g 2048
+Setting this to zero or negative disables the splitting of batches.
+
+#`logstash_index`
 
 A string that specifies the index to use for the logstash output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 
-*`logstash_ssl_certificate_authorities`
+#`logstash_ssl_certificate_authorities`
 
 An array of Strings that specifies paths to Certificate authority files when connecting to logstash.
 
-*`logstash_ssl_certificate`
+#`logstash_ssl_certificate`
 
 A String that specifies a path to your hosts certificate to use when connecting to logstash.
 
-*`logstash_ssl_certificate_key`
+#`logstash_ssl_certificate_key`
 
 A String that specifies a path to your hosts certificate key to use when connecting to logstash.
 
-*`logstash_worker`
+#`logstash_ttl`
+
+A String that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
+ see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
+ NOTE: this option explicitly disables pipelining, it is not compatible with the async logstash client
+ https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
+
+#`logstash_worker`
 
 A integer that specifies the number of workers participating in the load balancing
 
-*`logstash_loadbalance`
+#`logstash_loadbalance`
 
 A boolean to turn on or off load balancing for logstash outputs, defaults to false.
 
-*`elasticsearch_hosts`
+#`elasticsearch_hosts`
 
 A array containing the hostname/s of your elasticsearch host/s used for send the transactions directly
 to Elasticsearch by using the Elasticsearch HTTP API.
 If left empty then all other elasticsearch options are ignored
 
-*`elasticsearch_username`
+#`elasticsearch_username`
 
 The username filebeats should use to authenticate should your cluster make use of shield
 
-*`elasticsearch_password`
+#`elasticsearch_password`
 
 The password filebeats should use to authenticate should your cluster make use of shield
 
-*`elasticsearch_protocol`
+#`elasticsearch_protocol`
 
 A string containing the protocol used by filebeats, defaults to http. 
 
-*`elasticsearch_index`
+#`elasticsearch_index`
 
 A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 
-*`elasticsearch_ssl_certificate_authorities`
+#`elasticsearch_ssl_certificate_authorities`
 
 An array of Strings that specifies paths to Certificate authority files.
 
-*`elasticsearch_ssl_certificate`
+#`elasticsearch_ssl_certificate`
 
 A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
 
-*`elasticsearch_ssl_certificate_key`
+#`elasticsearch_ssl_certificate_key`
 
 A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 
@@ -119,19 +131,19 @@ A boolean that allows you to overwrite the existing template.
 
 A string that specifies the path to the template file
 
-*`export_log_paths`
+#`export_log_paths`
 
 An array of Strings that specifies which logs the filebeats application must export.
 
-*`log_settings`
+#`log_settings`
 
 A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'), to_syslog(true/false), path('/var/log/filebeat'), keepfiles(7), rotateeverybytes(10485760), name(filebeats.log)
 
-*`service_bootstrapped`
+#`service_bootstrapped`
 
 A boolean to turn on or off the filebeat service at boot ('false'/'true'), defaults to 'true'
 
-*`service_state`
+#`service_state`
 
 A string to describe the state of the filebeats service ('stopped'/'running'), defaults to 'running'
 

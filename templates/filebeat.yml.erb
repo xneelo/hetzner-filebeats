@@ -2,7 +2,7 @@ filebeat:
   prospectors:
 <% @prospectors_array.each do | prospector | -%>
 <% if prospector['input_type'] -%>
-    - input_type: <%= prospector['input_type'] %>
+    - type: <%= prospector['input_type'] %>
 <% end -%>
       paths:
 <% prospector['paths'].each do |path| -%>
@@ -51,6 +51,10 @@ output.logstash:
 <% if @logstash_worker > 1 -%>
   worker: <%= @logstash_worker %>
 <% end -%>
+<% if @logstash_ttl != '' -%>
+  ttl: <%= @logstash_ttl %>
+  pipelining: 0
+<% end -%>
 <% if @logstash_index != '' -%>
   index: <%= @logstash_index %>
 <% end -%>
@@ -63,6 +67,7 @@ output.logstash:
 <% if @logstash_ssl_certificate_key != '' -%>
   ssl.key: <%= @logstash_ssl_certificate_key %>
 <% end -%>
+  bulk_max_size: <%= @logstash_bulk_max_size %>
 <% end -%>
 <% if @elasticsearch_hosts != [] -%>
 

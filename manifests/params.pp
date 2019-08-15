@@ -15,11 +15,13 @@ class filebeats::params {
   $elasticsearch_username                    = ''
   $logstash_hosts                            = []
   $logstash_index                            = ''
+  $logstash_bulk_max_size                    = 2048
   $logstash_loadbalance                      = false
   $logstash_worker                           = 1
   $logstash_ssl_certificate                  = ''
   $logstash_ssl_certificate_authorities      = []
   $logstash_ssl_certificate_key              = ''
+  $logstash_ttl                              = ''
   $prospectors                               = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'

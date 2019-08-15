@@ -21,12 +21,14 @@ class filebeats::config (
   Array   $export_log_paths,
   Hash    $log_settings,
   Array   $logstash_hosts,
+  Integer $logstash_bulk_max_size,
   String  $logstash_index,
   Boolean $logstash_loadbalance,
   Integer $logstash_worker,
   String  $logstash_ssl_certificate,
   Array   $logstash_ssl_certificate_authorities,
   String  $logstash_ssl_certificate_key,
+  String  $logstash_ttl,
   Array   $prospectors,
 ){
   $config_path = $filebeats::params::config_path
@@ -35,6 +37,12 @@ class filebeats::config (
     $logging = {}
   } else {
     $logging = merge($::filebeats::params::log_settings, $log_settings)
+  }
+
+  if !empty($logstash_ttl) {
+    if $logstash_ttl !~ /^\-?[0-9]+\.?[0-9]*(?:ns|us|ms|s|m|h)$/ {
+      fail("Parameter \$logstash_ttl with content '${logstash_ttl}': is not a valid elastic duration")
+    }
   }
 
   if empty($prospectors) {
