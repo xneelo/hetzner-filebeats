@@ -19,6 +19,7 @@ class filebeats::config (
   String  $elasticsearch_template_path,
   String  $elasticsearch_username,
   Array   $export_log_paths,
+  String  $kibana_url,
   Hash    $log_settings,
   Array   $logstash_hosts,
   Integer $logstash_bulk_max_size,
