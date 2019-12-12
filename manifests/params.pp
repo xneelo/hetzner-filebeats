@@ -39,6 +39,10 @@ class filebeats::params {
       $export_log_paths = ['/var/log/*.log']
       $config_path      = '/etc/filebeat'
     }
+    'RedHat': {
+      $export_log_paths = ['/var/log/*.log']
+      $config_path      = '/etc/filebeat'
+    }
     default: {
       fail('Could not determine default params for your Operating System')
     }

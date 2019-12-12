@@ -22,24 +22,25 @@ filebeat:
 <% end -%>
 <% if prospector['fields'] -%>
       fields:
-  <% prospector['fields'].each do |k,v| -%>
+  <%- prospector['fields'].each do |k,v| -%>
         <%= k %>: '<%= v %>'
-  <% end -%>
+  <%- end -%>
 <% end -%>
-<% if prospector['json_keys_under_root'] -%>
+<%# if @json_message_key != '' %>
+<% if prospector['doc_type'] == 'json' -%>
+      # Parse each line as JSON
+      json.message_key: <%= prospector['json_message_key'] %>
+<% end -%>
+<%# if @json_keys_under_root != '' %>
+<% if prospector['doc_type'] == 'json' -%>
       json.keys_under_root: <%= prospector['json_keys_under_root'] %>
 <% end -%>
 <% if prospector['json_add_error_key'] -%>
       json.add_error_key: <%= prospector['json_add_error_key'] %>
 <% end -%>
-<% if prospector['json_add_error_key'] -%>
-      json.add_error_key: <%= prospector['add_error_key'] %>
 <% end -%>
-<% if prospector['json_message_key'] -%>
-      json.message_key: <%= prospector['json_message_key'] %>
-<% end -%>
-<% end -%>
-  registry_file: /var/lib/filebeat/registry
+registry_file: /var/lib/filebeat/registry
+output:
 <% if @logstash_hosts != [] -%>
 
 output.logstash:

@@ -9,6 +9,12 @@ class filebeats::package {
       }
       Class['apt::update'] -> Package['filebeat']
     }
+    'RedHat': {
+      package {'filebeat':
+        ensure => present,
+        require => Class['::elastic_stack::repo']
+      }
+    }
     default: {
       fail('Could not configure apt resource for elasticsearch filebeats')
     }
