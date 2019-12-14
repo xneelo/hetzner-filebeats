@@ -1,3 +1,9 @@
+##2019-12-09 - Release 1.0.4
+###Summary
+
+Ensure Apt update runs before package installation
+* Credit to Thodoris Sotiropoulos - theosotr
+
 ##2019-06-28 - Release 1.0.3
 ###Summary
 

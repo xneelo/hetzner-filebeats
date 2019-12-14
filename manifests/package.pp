@@ -7,6 +7,7 @@ class filebeats::package {
         ensure  => present,
         require => Class['::elastic_stack::repo']
       }
+      Class['apt::update'] -> Package['filebeat']
     }
     'RedHat': {
       package {'filebeat':
