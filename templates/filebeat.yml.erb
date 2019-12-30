@@ -81,6 +81,9 @@ output.logstash:
 
 output.elasticsearch:
   hosts: <%= @elasticsearch_hosts %>
+<% if @elasticsearch_ilm -%>
+  ilm.enable: true
+<% end -%>
 <% if @elasticsearch_index != '' -%>
   index: <%= @elasticsearch_index %>
 <% end -%>
