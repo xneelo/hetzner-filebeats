@@ -50,6 +50,8 @@
 #  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 # *`elasticsearch_index`
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+# *`elasticsearch_ilm`
+# A boolean that specifies whether to enable Elastic's ILM option, defaults to false
 #
 # Example
 # --------
@@ -75,6 +77,7 @@
 class filebeats (
   $elasticsearch_hosts                       = $filebeats::params::elasticsearch_hosts,
   $elasticsearch_index                       = $filebeats::params::elasticsearch_index,
+  $elasticsearch_ilm                         = $filebeats::params::elasticsearch_ilm,
   $elasticsearch_password                    = $filebeats::params::elasticsearch_password,
   $elasticsearch_protocol                    = $filebeats::params::elasticsearch_protocol,
   $elasticsearch_ssl_certificate             = $filebeats::params::elasticsearch_ssl_certificate,
