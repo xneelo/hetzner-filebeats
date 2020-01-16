@@ -38,11 +38,11 @@ filebeat:
 <% if prospector['json_keys_under_root'] -%>
       json.keys_under_root: <%= prospector['json_keys_under_root'] %>
 <% end -%>
-<% if prospector['json_add_error_key'] -%>
-      json.add_error_key: <%= prospector['json_add_error_key'] %>
+<% if prospector['json_overwrite_keys'] -%>
+      json.overwrite_keys: <%= prospector['json_overwrite_keys'] %>
 <% end -%>
 <% if prospector['json_add_error_key'] -%>
-      json.add_error_key: <%= prospector['add_error_key'] %>
+      json.add_error_key: <%= prospector['json_add_error_key'] %>
 <% end -%>
 <% if prospector['json_message_key'] -%>
       json.message_key: <%= prospector['json_message_key'] %>
