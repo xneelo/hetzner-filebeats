@@ -35,9 +35,6 @@ filebeat:
 <% if prospector['json_add_error_key'] -%>
       json.add_error_key: <%= prospector['json_add_error_key'] %>
 <% end -%>
-<% if prospector['json_add_error_key'] -%>
-      json.add_error_key: <%= prospector['add_error_key'] %>
-<% end -%>
 <% if prospector['json_message_key'] -%>
       json.message_key: <%= prospector['json_message_key'] %>
 <% end -%>
