@@ -30,6 +30,7 @@ class filebeats::config (
   Array   $logstash_ssl_certificate_authorities,
   String  $logstash_ssl_certificate_key,
   String  $logstash_ttl,
+  Hash    $modules,
   Array   $prospectors,
 ){
   $config_path = $filebeats::params::config_path
@@ -65,6 +66,16 @@ class filebeats::config (
     content => template('filebeats/filebeat.yml.erb'),
     require => Package['filebeat'],
     notify  => Service['filebeat'],
+  }
+notify { 'bobob': message => "vaslue of modules is ${modules}", }
+
+  $modules.each | String $action, Array $modules| {
+    unless $module.empty {
+    $modules.each | String $module| {
+      exec { "filebeat_${module}_${action}":
+        command => "filebeat module ${action} ${modulename}"
+      }
+    }
   }
 
 }
