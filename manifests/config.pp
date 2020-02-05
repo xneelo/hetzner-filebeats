@@ -31,6 +31,7 @@ class filebeats::config (
   String  $logstash_ssl_certificate_key,
   String  $logstash_ttl,
   Hash    $modules,
+  String  $modules_conf_dir,
   Array   $prospectors,
 ){
   $config_path = $filebeats::params::config_path
@@ -67,13 +68,24 @@ class filebeats::config (
     require => Package['filebeat'],
     notify  => Service['filebeat'],
   }
-notify { 'bobob': message => "vaslue of modules is ${modules}", }
 
-  $modules.each | String $action, Array $modules| {
-    unless $module.empty {
-    $modules.each | String $module| {
-      exec { "filebeat_${module}_${action}":
-        command => "filebeat module ${action} ${modulename}"
+#TODO turn this into a puppet resource
+  $modules.each | String $action, Array $module_name | {
+    $module_name.each | String $module| {
+      if $action == 'enable' {
+        exec { "filebeat_${module}_${action}":
+          command => "filebeat modules ${action} ${module}",
+          creates => "${modules_conf_dir}/${module}.yml",
+          require => Package['filebeat'],
+          notify  => Service['filebeat'],
+        }
+      } else {
+        exec { "filebeat_${module}_${action}":
+          command => "filebeat modules ${action} ${module}",
+          creates => "${modules_conf_dir}/${module}.yml.disabled",
+          require => Package['filebeat'],
+          notify  => Service['filebeat'],
+        }
       }
     }
   }

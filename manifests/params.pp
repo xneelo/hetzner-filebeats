@@ -27,6 +27,7 @@ class filebeats::params {
                                                   enable => [],
                                                   disable => []
                                                }
+  $modules_conf_dir                          = '/etc/filebeat/modules.d'
   $prospectors                               = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'

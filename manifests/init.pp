@@ -101,6 +101,7 @@ class filebeats (
   $logstash_ttl                              = $filebeats::params::logstash_ttl,
   $logstash_worker                           = $filebeats::params::logstash_worker,
   $modules                                   = $filebeats::params::modules,
+  $modules_conf_dir                          = $filebeats::params::modules_conf_dir,
   $prospectors                               = $filebeats::params::prospectors,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
   $service_state                             = $filebeats::params::service_state,
@@ -140,6 +141,7 @@ class filebeats (
     logstash_ttl                              => $logstash_ttl,
     logstash_worker                           => $logstash_worker,
     modules                                   => $modules,
+    modules_conf_dir                          => $modules_conf_dir,
     prospectors                               => $prospectors,
   }
 
