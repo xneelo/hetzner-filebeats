@@ -23,6 +23,11 @@ class filebeats::params {
   $logstash_ssl_certificate_authorities      = []
   $logstash_ssl_certificate_key              = ''
   $logstash_ttl                              = ''
+  $modules                                   = {
+                                                  enable => [],
+                                                  disable => []
+                                               }
+  $modules_conf_dir                          = '/etc/filebeat/modules.d'
   $prospectors                               = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'
