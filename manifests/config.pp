@@ -19,6 +19,7 @@ class filebeats::config (
   String  $elasticsearch_template_path,
   String  $elasticsearch_username,
   Array   $export_log_paths,
+  String  $kibana_url,
   Hash    $log_settings,
   Array   $logstash_hosts,
   Integer $logstash_bulk_max_size,
@@ -29,7 +30,7 @@ class filebeats::config (
   Array   $logstash_ssl_certificate_authorities,
   String  $logstash_ssl_certificate_key,
   String  $logstash_ttl,
-  Array   $inputs,
+  Array   $inputs
 ){
   $config_path = $filebeats::params::config_path
 
@@ -64,6 +65,27 @@ class filebeats::config (
     content => template('filebeats/filebeat.yml.erb'),
     require => Package['filebeat'],
     notify  => Service['filebeat'],
+  }
+
+#TODO turn this into a puppet resource
+  $modules.each | String $action, Array $module_name | {
+    $module_name.each | String $module| {
+      if $action == 'enable' {
+        exec { "filebeat_${module}_${action}":
+          command => "filebeat modules ${action} ${module}",
+          creates => "${modules_conf_dir}/${module}.yml",
+          require => Package['filebeat'],
+          notify  => Service['filebeat'],
+        }
+      } else {
+        exec { "filebeat_${module}_${action}":
+          command => "filebeat modules ${action} ${module}",
+          creates => "${modules_conf_dir}/${module}.yml.disabled",
+          require => Package['filebeat'],
+          notify  => Service['filebeat'],
+        }
+      }
+    }
   }
 
 }

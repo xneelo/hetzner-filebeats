@@ -50,6 +50,8 @@
 #  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 # *`elasticsearch_index`
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+# *`elasticsearch_ilm`
+# A boolean that specifies whether to enable Elastic's ILM option, defaults to false
 #
 # Example
 # --------
@@ -75,6 +77,7 @@
 class filebeats (
   $elasticsearch_hosts                       = $filebeats::params::elasticsearch_hosts,
   $elasticsearch_index                       = $filebeats::params::elasticsearch_index,
+  $elasticsearch_ilm                         = $filebeats::params::elasticsearch_ilm,
   $elasticsearch_password                    = $filebeats::params::elasticsearch_password,
   $elasticsearch_protocol                    = $filebeats::params::elasticsearch_protocol,
   $elasticsearch_ssl_certificate             = $filebeats::params::elasticsearch_ssl_certificate,
@@ -86,6 +89,7 @@ class filebeats (
   $elasticsearch_template_path               = $filebeats::params::elasticsearch_template_path,
   $elasticsearch_username                    = $filebeats::params::elasticsearch_username,
   $export_log_paths                          = $filebeats::params::export_log_paths,
+  $kibana_url                                = '',
   $log_settings                              = {},
   $logstash_hosts                            = $filebeats::params::logstash_hosts,
   $logstash_bulk_max_size                    = $filebeats::params::logstash_bulk_max_size,
@@ -123,6 +127,7 @@ class filebeats (
     elasticsearch_template_path               => $elasticsearch_template_path,
     elasticsearch_username                    => $elasticsearch_username,
     export_log_paths                          => $export_log_paths,
+    kibana_url                                => $kibana_url,
     log_settings                              => $log_settings,
     logstash_hosts                            => $logstash_hosts,
     logstash_bulk_max_size                    => $logstash_bulk_max_size,
@@ -134,6 +139,9 @@ class filebeats (
     logstash_ttl                              => $logstash_ttl,
     logstash_worker                           => $logstash_worker,
     inputs                                    => $inputs,
+    modules                                   => $modules,
+    modules_conf_dir                          => $modules_conf_dir,
+    prospectors                               => $prospectors,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']

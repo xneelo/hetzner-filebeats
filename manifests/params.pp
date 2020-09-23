@@ -3,6 +3,7 @@
 class filebeats::params {
   $elasticsearch_hosts                       = []
   $elasticsearch_index                       = ''
+  $elasticsearch_ilm                         = false
   $elasticsearch_password                    = ''
   $elasticsearch_protocol                    = 'http'
   $elasticsearch_ssl_certificate             = ''

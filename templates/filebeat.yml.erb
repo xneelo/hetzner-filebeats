@@ -1,3 +1,12 @@
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+
+<% if @kibana_url != [] -%>
+setup.kibana:
+  host: '<%= @kibana_url %>'
+
+<% end -%>
 filebeat:
   inputs:
 <% @inputs_array.each do | input | -%>
@@ -72,17 +81,20 @@ output.logstash:
 
 output.elasticsearch:
   hosts: <%= @elasticsearch_hosts %>
+<% if @elasticsearch_ilm -%>
+  ilm.enable: true
+<% end -%>
 <% if @elasticsearch_index != '' -%>
   index: <%= @elasticsearch_index %>
 <% end -%>
 <% if @elasticsearch_protocol != '' -%>
-   protocol: <%= @elasticsearch_protocol %>
+  protocol: <%= @elasticsearch_protocol %>
 <% end -%>
 <% if @elasticsearch_username != '' -%>
- username: <%= @elasticsearch_username %>
+  username: <%= @elasticsearch_username %>
 <% end -%>
 <% if @elasticsearch_password != '' -%>
- password: <%= @elasticsearch_password %>
+  password: <%= @elasticsearch_password %>
 <% end -%>
 <% if @elasticsearch_ssl_certificate_authorities != [] -%>
   ssl.certificate_authorities: <%= @elasticsearch_ssl_certificate_authorities %>
@@ -94,7 +106,7 @@ output.elasticsearch:
   ssl.key: <%= @elasticsearch_ssl_certificate_key %>
 <% end -%>
 <% if @elasticsearch_template_enabled -%>
-   template.enabled: true
+  template.enabled: true
 <% end -%>
 <% if @elasticsearch_template_name != '' -%>
   template.name: <%= @elasticsearch_template_name %>
