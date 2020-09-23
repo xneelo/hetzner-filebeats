@@ -29,7 +29,7 @@ class filebeats::config (
   Array   $logstash_ssl_certificate_authorities,
   String  $logstash_ssl_certificate_key,
   String  $logstash_ttl,
-  Array   $prospectors,
+  Array   $inputs,
 ){
   $config_path = $filebeats::params::config_path
 
@@ -45,15 +45,15 @@ class filebeats::config (
     }
   }
 
-  if empty($prospectors) {
+  if empty($inputs) {
     validate_array($export_log_paths)
 
-    $prospectors_array =  [{'paths'         => $export_log_paths,
+    $inputs_array =  [{'paths'         => $export_log_paths,
                             'input_type'    => 'log',
                             'doc_type' => 'log'
                           }]
   } else {
-    $prospectors_array = $prospectors
+    $inputs_array = $inputs
   }
 
   file {"${config_path}/filebeat.yml":

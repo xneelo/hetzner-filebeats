@@ -35,10 +35,10 @@ Use puppet module install function to install module and simply include it from 
 
 The module can be called with the following parameters:
 
-#`prospectors` OPTIONAL
+#`inputs` OPTIONAL
 
-An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
-This value should be used if you wish to have more than one prospector.
+An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
+This value should be used if you wish to have more than one input.
 
 #`logstash_hosts`
 
@@ -160,11 +160,11 @@ Auth.log being exported with elasticsearch out requiring a user and password.
    }
 ```
 
-Multiple prospectors with multiple log files being exported to multiple logstash hosts.
+Multiple inputs with multiple log files being exported to multiple logstash hosts.
 
 ```
    class { 'filebeats':
-     prospectors          => [{ 'input_type'    => 'log',
+     inputs          => [{ 'input_type'    => 'log',
                                 'doc_type'      => 'log',
                                 'paths'         => ['/var/log/auth.log'],
                                 'include_lines' => "['sshd','passwd','vigr']",
@@ -184,7 +184,7 @@ Multiple prospectors with multiple log files being exported to multiple logstash
 ## Hiera data example
 
 ```
-filebeats::prospectors:
+filebeats::inputs:
   - input_type: 'log'
     paths:
       - '/var/log/auth.log'
