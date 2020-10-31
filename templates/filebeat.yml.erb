@@ -8,7 +8,7 @@ setup.kibana:
 
 <% end -%>
 filebeat:
-  prospectors:
+  inputs:
 <% @prospectors_array.each do | prospector | -%>
 <% if prospector['input_type'] -%>
     - type: <%= prospector['input_type'] %>
@@ -48,9 +48,8 @@ filebeat:
       json.message_key: <%= prospector['json_message_key'] %>
 <% end -%>
 <% end -%>
-  registry_file: /var/lib/filebeat/registry
-<% if @logstash_hosts != [] -%>
 
+<% if @logstash_hosts != [] -%>
 output.logstash:
   hosts: <%= @logstash_hosts %>
 <% if @logstash_loadbalance -%>
