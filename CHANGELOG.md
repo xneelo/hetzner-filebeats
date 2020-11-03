@@ -1,3 +1,10 @@
+##2020-11-03 - Release 2.0.0
+###Summary
+
+Major version change -
+Addressing breaking changes specifically around prospectors to inputs and registry file settings.
+Adjusted naming to conform to new standard set our by Elastic (prospectors -> inputs)
+
 ##2019-12-09 - Release 1.0.4
 ###Summary
 
