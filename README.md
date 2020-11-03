@@ -35,9 +35,9 @@ Use puppet module install function to install module and simply include it from 
 
 The module can be called with the following parameters:
 
-#`prospectors` OPTIONAL
+#`inputs` OPTIONAL
 
-An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
+An array of hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
 This value should be used if you wish to have more than one prospector.
 
 #`logstash_hosts`
@@ -69,7 +69,7 @@ A String that specifies a path to your hosts certificate key to use when connect
 #`logstash_ttl`
 
 A String that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
- see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
+ see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html #_duration
  NOTE: this option explicitly disables pipelining, it is not compatible with the async logstash client
  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 
@@ -160,11 +160,11 @@ Auth.log being exported with elasticsearch out requiring a user and password.
    }
 ```
 
-Multiple prospectors with multiple log files being exported to multiple logstash hosts.
+Multiple inputs with multiple log files being exported to multiple logstash hosts.
 
 ```
    class { 'filebeats':
-     prospectors          => [{ 'input_type'    => 'log',
+     inputs               => [{ 'input_type'    => 'log',
                                 'doc_type'      => 'log',
                                 'paths'         => ['/var/log/auth.log'],
                                 'include_lines' => "['sshd','passwd','vigr']",
@@ -184,7 +184,7 @@ Multiple prospectors with multiple log files being exported to multiple logstash
 ## Hiera data example
 
 ```
-filebeats::prospectors:
+filebeats::inputs:
   - input_type: 'log'
     paths:
       - '/var/log/auth.log'
