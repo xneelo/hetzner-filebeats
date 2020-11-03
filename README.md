@@ -69,7 +69,7 @@ A String that specifies a path to your hosts certificate key to use when connect
 #`logstash_ttl`
 
 A String that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
- see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html #_duration
+ see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
  NOTE: this option explicitly disables pipelining, it is not compatible with the async logstash client
  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 

@@ -1,9 +1,8 @@
 ##2020-11-03 - Release 2.0.0
 ###Summary
 
-Major version change -
-Addressing breaking changes specifically around prospectors to inputs and registry file settings.
-Adjusted naming to conform to new standard set our by Elastic (prospectors -> inputs)
+Major version change 6.x => 7.x
+* https://www.elastic.co/guide/en/beats/libbeat/7.9/breaking-changes-7.0.html#breaking-changes-7.0
 
 ##2019-12-09 - Release 1.0.4
 ###Summary
