@@ -234,6 +234,11 @@ Specifies defaults for the installation and configuration
 
 Does not support all options available to filebeats configuration.
 
+If you're running a Filebeat version lower than 7.x, e.g 6.8.10. You need to install the `pre-v7.x` release in order for the module
+to be compatible - https://github.com/xneelo/hetzner-filebeats/releases
+
+If you're running Filebeat version 7 and up. You can install the `production` branch of this module or refer to the releases section again.
+
 ## Development
 
 All pull requests are welcome. This module was just created for our use and functionality will be added as we require it.
