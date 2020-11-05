@@ -10,8 +10,8 @@
 #
 # * `export_log_paths`
 # An array of Strings that specifies which logs the filebeats application must export.
-# * `prospectors`
-# An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
+# * `inputs`
+# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
 # * `elasticsearch_username`
 # The username filebeats should use to authenticate should your cluster make use of elasticsearch
 # * `elasticsearch_password`
@@ -102,7 +102,7 @@ class filebeats (
   $logstash_worker                           = $filebeats::params::logstash_worker,
   $modules                                   = $filebeats::params::modules,
   $modules_conf_dir                          = $filebeats::params::modules_conf_dir,
-  $prospectors                               = $filebeats::params::prospectors,
+  $inputs                                    = $filebeats::params::inputs,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
   $service_state                             = $filebeats::params::service_state,
 ) inherits ::filebeats::params {
@@ -142,7 +142,7 @@ class filebeats (
     logstash_worker                           => $logstash_worker,
     modules                                   => $modules,
     modules_conf_dir                          => $modules_conf_dir,
-    prospectors                               => $prospectors,
+    inputs                                    => $inputs,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']
