@@ -32,7 +32,7 @@ class filebeats::config (
   String  $logstash_ttl,
   Hash    $modules,
   String  $modules_conf_dir,
-  Array   $prospectors,
+  Array   $inputs,
 ){
   $config_path = $filebeats::params::config_path
 
@@ -48,15 +48,15 @@ class filebeats::config (
     }
   }
 
-  if empty($prospectors) {
+  if empty($inputs) {
     validate_array($export_log_paths)
 
-    $prospectors_array =  [{'paths'         => $export_log_paths,
+    $inputs_array =  [{'paths'         => $export_log_paths,
                             'input_type'    => 'log',
                             'doc_type' => 'log'
                           }]
   } else {
-    $prospectors_array = $prospectors
+    $inputs_array = $inputs
   }
 
   file {"${config_path}/filebeat.yml":
