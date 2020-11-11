@@ -13,7 +13,7 @@
 
 ## Description
 
-Very simple puppet module to install and configure elasticsearch filebeats
+Very simple puppet module to install and configure elasticsearch filebeats.
 
 ## Setup
 
@@ -35,9 +35,9 @@ Use puppet module install function to install module and simply include it from 
 
 The module can be called with the following parameters:
 
-#`prospectors` OPTIONAL
+#`inputs` OPTIONAL
 
-An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
+An array of hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
 This value should be used if you wish to have more than one prospector.
 
 #`logstash_hosts`
@@ -160,11 +160,11 @@ Auth.log being exported with elasticsearch out requiring a user and password.
    }
 ```
 
-Multiple prospectors with multiple log files being exported to multiple logstash hosts.
+Multiple inputs with multiple log files being exported to multiple logstash hosts.
 
 ```
    class { 'filebeats':
-     prospectors          => [{ 'input_type'    => 'log',
+     inputs               => [{ 'input_type'    => 'log',
                                 'doc_type'      => 'log',
                                 'paths'         => ['/var/log/auth.log'],
                                 'include_lines' => "['sshd','passwd','vigr']",
@@ -184,7 +184,7 @@ Multiple prospectors with multiple log files being exported to multiple logstash
 ## Hiera data example
 
 ```
-filebeats::prospectors:
+filebeats::inputs:
   - input_type: 'log'
     paths:
       - '/var/log/auth.log'
@@ -233,6 +233,11 @@ Specifies defaults for the installation and configuration
 ## Limitations
 
 Does not support all options available to filebeats configuration.
+
+If you're running a Filebeat version lower than 7.x, e.g 6.8.10. You need to install the `pre-v7.x` release in order for the module
+to be compatible - https://github.com/xneelo/hetzner-filebeats/releases
+
+If you're running Filebeat version 7 and up. You can install the `production` branch of this module or refer to the releases section again.
 
 ## Development
 

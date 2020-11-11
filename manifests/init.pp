@@ -10,8 +10,8 @@
 #
 # * `export_log_paths`
 # An array of Strings that specifies which logs the filebeats application must export.
-# * `prospectors`
-# An array of Hashes that specifies which groups of prospectors log entries the filebeats application must export.
+# * `inputs`
+# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
 # * `elasticsearch_username`
 # The username filebeats should use to authenticate should your cluster make use of elasticsearch
 # * `elasticsearch_password`
@@ -50,6 +50,8 @@
 #  https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html#_literal_ttl_literal
 # *`elasticsearch_index`
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+# *`elasticsearch_ilm`
+# A boolean that specifies whether to enable Elastic's ILM option, defaults to false
 #
 # Example
 # --------
@@ -75,6 +77,7 @@
 class filebeats (
   $elasticsearch_hosts                       = $filebeats::params::elasticsearch_hosts,
   $elasticsearch_index                       = $filebeats::params::elasticsearch_index,
+  $elasticsearch_ilm                         = $filebeats::params::elasticsearch_ilm,
   $elasticsearch_password                    = $filebeats::params::elasticsearch_password,
   $elasticsearch_protocol                    = $filebeats::params::elasticsearch_protocol,
   $elasticsearch_ssl_certificate             = $filebeats::params::elasticsearch_ssl_certificate,
@@ -86,6 +89,7 @@ class filebeats (
   $elasticsearch_template_path               = $filebeats::params::elasticsearch_template_path,
   $elasticsearch_username                    = $filebeats::params::elasticsearch_username,
   $export_log_paths                          = $filebeats::params::export_log_paths,
+  $kibana_url                                = '',
   $log_settings                              = {},
   $logstash_hosts                            = $filebeats::params::logstash_hosts,
   $logstash_bulk_max_size                    = $filebeats::params::logstash_bulk_max_size,
@@ -96,7 +100,9 @@ class filebeats (
   $logstash_ssl_certificate_key              = $filebeats::params::logstash_ssl_certificate_key,
   $logstash_ttl                              = $filebeats::params::logstash_ttl,
   $logstash_worker                           = $filebeats::params::logstash_worker,
-  $prospectors                               = $filebeats::params::prospectors,
+  $modules                                   = $filebeats::params::modules,
+  $modules_conf_dir                          = $filebeats::params::modules_conf_dir,
+  $inputs                                    = $filebeats::params::inputs,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
   $service_state                             = $filebeats::params::service_state,
 ) inherits ::filebeats::params {
@@ -123,6 +129,7 @@ class filebeats (
     elasticsearch_template_path               => $elasticsearch_template_path,
     elasticsearch_username                    => $elasticsearch_username,
     export_log_paths                          => $export_log_paths,
+    kibana_url                                => $kibana_url,
     log_settings                              => $log_settings,
     logstash_hosts                            => $logstash_hosts,
     logstash_bulk_max_size                    => $logstash_bulk_max_size,
@@ -133,7 +140,9 @@ class filebeats (
     logstash_ssl_certificate_key              => $logstash_ssl_certificate_key,
     logstash_ttl                              => $logstash_ttl,
     logstash_worker                           => $logstash_worker,
-    prospectors                               => $prospectors,
+    modules                                   => $modules,
+    modules_conf_dir                          => $modules_conf_dir,
+    inputs                                    => $inputs,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']

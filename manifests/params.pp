@@ -3,6 +3,7 @@
 class filebeats::params {
   $elasticsearch_hosts                       = []
   $elasticsearch_index                       = ''
+  $elasticsearch_ilm                         = false
   $elasticsearch_password                    = ''
   $elasticsearch_protocol                    = 'http'
   $elasticsearch_ssl_certificate             = ''
@@ -22,7 +23,12 @@ class filebeats::params {
   $logstash_ssl_certificate_authorities      = []
   $logstash_ssl_certificate_key              = ''
   $logstash_ttl                              = ''
-  $prospectors                               = []
+  $modules                                   = {
+                                                  enable => [],
+                                                  disable => []
+                                               }
+  $modules_conf_dir                          = '/etc/filebeat/modules.d'
+  $inputs                                    = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'
   $log_settings                              =  {
