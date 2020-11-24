@@ -11,7 +11,8 @@
 # * `export_log_paths`
 # An array of Strings that specifies which logs the filebeats application must export.
 # * `inputs`
-# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
+# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application 
+#  must export.
 # * `elasticsearch_username`
 # The username filebeats should use to authenticate should your cluster make use of elasticsearch
 # * `elasticsearch_password`
@@ -52,6 +53,23 @@
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 # *`elasticsearch_ilm`
 # A boolean that specifies whether to enable Elastic's ILM option, defaults to false
+# *`ilm_check_exits`
+# A boolean when set to false, disables the check for an existing lifecycle policy. The default is true. You need to disable 
+#  this check if the Filebeat user connecting to a secured cluster doesn’t have the read_ilm privilege
+# *`ilm_enabled`
+# A boolean that Enables or disables index lifecycle management on any new indices created by Filebeat. Valid values are
+#  true, false, and auto
+# *`ilm_overwrite`
+# A boolean when set to true, the lifecycle policy is overwritten at startup
+# *`ilm_pattern`
+# A string that specifies the rollover index pattern. Date math is supported in this setting
+# *`ilm_policy_file`
+# A string that specifies the path to a JSON file that contains a lifecycle policy configuration. Use this setting to load your
+#  own lifecycle policy
+# *`ilm_policy_name`
+# A string that specifies the name to use for the lifecycle policy
+# *`ilm_rollover_alias`
+# A string that specifies the index lifecycle write alias name
 #
 # Example
 # --------
@@ -102,6 +120,13 @@ class filebeats (
   $logstash_worker                           = $filebeats::params::logstash_worker,
   $modules                                   = $filebeats::params::modules,
   $modules_conf_dir                          = $filebeats::params::modules_conf_dir,
+  $ilm_check_exits                           = $filebeats::params::ilm_check_exits,
+  $ilm_enabled                               = $filebeats::params::ilm_enabled,
+  $ilm_overwrite                             = $filebeats::params::ilm_overwrite,
+  $ilm_pattern                               = $filebeats::params::ilm_pattern,
+  $ilm_policy_file                           = $filebeats::params::ilm_policy_file,
+  $ilm_policy_name                           = $filebeats::params::ilm_policy_name,
+  $ilm_rollover_alias                        = $filebeats::params::ilm_rollover_alias,
   $inputs                                    = $filebeats::params::inputs,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
   $service_state                             = $filebeats::params::service_state,
@@ -143,6 +168,13 @@ class filebeats (
     modules                                   => $modules,
     modules_conf_dir                          => $modules_conf_dir,
     inputs                                    => $inputs,
+    ilm_check_exits                           => $ilm_check_exits,
+    ilm_enabled                               => $ilm_enabled,
+    ilm_overwrite                             => $ilm_overwrite,
+    ilm_pattern                               => $ilm_pattern,
+    ilm_policy_file                           => $ilm_policy_file,
+    ilm_policy_name                           => $ilm_policy_name,
+    ilm_rollover_alias                        => $ilm_rollover_alias,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']

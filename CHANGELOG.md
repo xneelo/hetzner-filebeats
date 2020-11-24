@@ -1,3 +1,9 @@
+##2020-11-24 - Release 2.1.0
+###Summary
+
+Support setting filebeat ilm
+* Filebeat 7.0 sets ilm on by default so we need to be able to configure this
+
 ##2020-11-03 - Release 2.0.0
 ###Summary
 

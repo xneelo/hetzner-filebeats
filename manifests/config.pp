@@ -1,9 +1,5 @@
 #Basic filebeat configuration
-# Params:
-#   export_log_paths: Array of Strings - path to log files to export.
-#   shield_username: String - Username for shield authentication.
-#   shield_password: String - Password for shield authentication.
-#More details on shield: https://www.elastic.co/guide/en/shield/current/getting-started.html
+#More details: https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
 
 class filebeats::config (
   Array   $elasticsearch_hosts,
@@ -33,6 +29,7 @@ class filebeats::config (
   Hash    $modules,
   String  $modules_conf_dir,
   Array   $inputs,
+  Hash    $ilm,
 ){
   $config_path = $filebeats::params::config_path
 
@@ -51,10 +48,10 @@ class filebeats::config (
   if empty($inputs) {
     validate_array($export_log_paths)
 
-    $inputs_array =  [{'paths'         => $export_log_paths,
-                            'input_type'    => 'log',
-                            'doc_type' => 'log'
-                          }]
+    $inputs_array =  [{ 'paths'      => $export_log_paths,
+                        'input_type' => 'log',
+                        'doc_type'   => 'log'
+                      }]
   } else {
     $inputs_array = $inputs
   }

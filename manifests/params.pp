@@ -24,10 +24,17 @@ class filebeats::params {
   $logstash_ssl_certificate_key              = ''
   $logstash_ttl                              = ''
   $modules                                   = {
-                                                  enable => [],
+                                                  enable  => [],
                                                   disable => []
-                                               }
+                                                }
   $modules_conf_dir                          = '/etc/filebeat/modules.d'
+  $ilm_check_exits                           = true
+  $ilm_enabled                               = auto
+  $ilm_overwrite                             = false
+  $ilm_pattern                               = ''
+  $ilm_policy_file                           = ''
+  $ilm_policy_name                           = ''
+  $ilm_rollover_alias                        = ''
   $inputs                                    = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'
