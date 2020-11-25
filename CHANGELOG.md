@@ -1,7 +1,14 @@
 ## [2.1.0](https://github.com/xneelo/hetzner-filebeats/tree/2.1.0) (2020-11-25)
 
-Support setting filebeat ilm
-- Filebeat 7.0 sets ilm on by default so we need to be able to configure this
+### Add support configuring filebeat ilm
+Filebeat 7.0 sets ilm on by default so we need to be able to configure this, the new config options are:
+* [setup.ilm.enabled](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-option)
+* [setup.ilm.rollover_alias](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-rollover_alias-option)
+* [setup.ilm.pattern](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-pattern-option)
+* [setup.ilm.policy_name](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-policy_name-option)
+* [setup.ilm.policy_file](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-policy_file-option)
+* [setup.ilm.check_exits](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-check_exists-option)
+* [setup.ilm.overwrite](https://www.elastic.co/guide/en/beats/filebeat/current/ilm.html#setup-ilm-overwrite-option)
 
 ## [2.0.1](https://github.com/xneelo/hetzner-filebeats/tree/2.0.1) (2020-11-20)
 
