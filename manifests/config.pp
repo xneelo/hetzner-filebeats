@@ -29,7 +29,13 @@ class filebeats::config (
   Hash    $modules,
   String  $modules_conf_dir,
   Array   $inputs,
-  Hash    $ilm,
+  Boolean $ilm_check_exits,
+  Boolean $ilm_enabled,
+  Boolean $ilm_overwrite,
+  String  $ilm_pattern,
+  String  $ilm_policy_file,
+  String  $ilm_policy_name,
+  String  $ilm_rollover_alias,
 ){
   $config_path = $filebeats::params::config_path
 
@@ -73,6 +79,7 @@ class filebeats::config (
         exec { "filebeat_${module}_${action}":
           command => "filebeat modules ${action} ${module}",
           creates => "${modules_conf_dir}/${module}.yml",
+          onlyif  => "[ -e ${modules_conf_dir}/${module}.yml.disabled ]",
           require => Package['filebeat'],
           notify  => Service['filebeat'],
         }
@@ -80,6 +87,7 @@ class filebeats::config (
         exec { "filebeat_${module}_${action}":
           command => "filebeat modules ${action} ${module}",
           creates => "${modules_conf_dir}/${module}.yml.disabled",
+          onlyif  => "[ -e ${modules_conf_dir}/${module}.yml ]",
           require => Package['filebeat'],
           notify  => Service['filebeat'],
         }

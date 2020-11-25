@@ -4,6 +4,12 @@
 Support setting filebeat ilm
 * Filebeat 7.0 sets ilm on by default so we need to be able to configure this
 
+##2020-11-20 - Release 2.0.1
+###Summary
+
+Minor tweak to enable/disable module
+* Only attempt to enable if it is disabled, only disable if it is enabled
+
 ##2020-11-03 - Release 2.0.0
 ###Summary
 
