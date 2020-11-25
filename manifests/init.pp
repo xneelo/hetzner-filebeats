@@ -57,8 +57,8 @@
 # A boolean when set to false, disables the check for an existing lifecycle policy. The default is true. You need to disable 
 #  this check if the Filebeat user connecting to a secured cluster doesn’t have the read_ilm privilege
 # *`ilm_enabled`
-# A boolean that Enables or disables index lifecycle management on any new indices created by Filebeat. Valid values are
-#  true, false, and auto
+# A string that Enables or disables index lifecycle management on any new indices created by Filebeat. Valid values are
+#  true, false, and auto (because auto is also an option, this can be a puppet Boolean)
 # *`ilm_overwrite`
 # A boolean when set to true, the lifecycle policy is overwritten at startup
 # *`ilm_pattern`

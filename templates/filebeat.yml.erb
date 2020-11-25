@@ -9,6 +9,7 @@ setup.kibana:
 <% end -%>
 setup.ilm:
   enabled: <%= @ilm_enabled %>
+<% if @ilm_enabled != 'false' -%>
 <% if @ilm_rollover_alias != '' -%>
   rollover_alias: "<%= @ilm_rollover_alias %>"
 <% end -%>
@@ -26,6 +27,7 @@ setup.ilm:
 <% end -%>
 <% if @ilm_overwrite != '' -%>
   overwrite: <%= @ilm_overwrite %>
+<% end -%>
 <% end -%>
 
 filebeat:

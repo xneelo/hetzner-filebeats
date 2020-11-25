@@ -29,7 +29,7 @@ class filebeats::params {
                                                 }
   $modules_conf_dir                          = '/etc/filebeat/modules.d'
   $ilm_check_exits                           = true
-  $ilm_enabled                               = auto
+  $ilm_enabled                               = 'auto'
   $ilm_overwrite                             = false
   $ilm_pattern                               = ''
   $ilm_policy_file                           = ''

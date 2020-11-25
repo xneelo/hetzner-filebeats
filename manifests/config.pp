@@ -30,7 +30,7 @@ class filebeats::config (
   String  $modules_conf_dir,
   Array   $inputs,
   Boolean $ilm_check_exits,
-  Boolean $ilm_enabled,
+  String  $ilm_enabled,
   Boolean $ilm_overwrite,
   String  $ilm_pattern,
   String  $ilm_policy_file,
@@ -60,6 +60,10 @@ class filebeats::config (
                       }]
   } else {
     $inputs_array = $inputs
+  }
+
+  if ! ($ilm_enabled in [ 'auto', 'true', 'false' ]) {
+    fail("Parameter \$ilm_enabled with content '${ilm_enabled}': must be one of [ 'auto', 'true', 'false' ]")
   }
 
   file {"${config_path}/filebeat.yml":
