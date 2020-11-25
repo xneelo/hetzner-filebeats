@@ -22,11 +22,11 @@
 # If left empty it will default to exporting logs to your local host on port 9200.
 # * `elasticsearch_protocol`
 # A string containing the protocl used by filebeats to send logs.
-# * `ssl_certificate_authorities`
+# * `elasticsearch_ssl_certificate_authorities`
 # An array of Strings that specifies paths to Certificate authority files.
-# * `ssl_certificate`
+# * `elasticsearch_ssl_certificate`
 # A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
-# * `ssl_certificate_key`
+# * `elasticsearch_ssl_certificate_key`
 # A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 # * `log_settings`
 # A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'),
@@ -44,6 +44,12 @@
 # *`logstash_bulk_max_size`
 # A number representing the maximum number of events to bulk in a single Logstash request, e.g 2048
 #   Setting this to zero or negative disables the splitting of batches.
+# * `logstash_ssl_certificate_authorities`
+# An array of Strings that specifies paths to Certificate authority files when connecting to logstash.
+# * `logstash_ssl_certificate`
+# A String that specifies a path to your hosts certificate to use when connecting to logstash.
+# * `logstash_ssl_certificate_key`
+# A String that specifies a path to your hosts certificate key to use when connecting to logstash.
 # *`logstash_ttl`
 # A string that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
 #  see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
