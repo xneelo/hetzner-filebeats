@@ -63,6 +63,7 @@
 # A boolean when set to true, the lifecycle policy is overwritten at startup
 # *`ilm_pattern`
 # A string that specifies the rollover index pattern. Date math is supported in this setting
+# Because the variable can use %, you must cater for it like this "%%{}{now/d}-000001"
 # *`ilm_policy_file`
 # A string that specifies the path to a JSON file that contains a lifecycle policy configuration. Use this setting to load your
 #  own lifecycle policy
@@ -70,6 +71,7 @@
 # A string that specifies the name to use for the lifecycle policy
 # *`ilm_rollover_alias`
 # A string that specifies the index lifecycle write alias name
+# Because the variable can use %, you must cater for it like this "filebeat-%%{}{[agent.version]}"
 #
 # Example
 # --------
