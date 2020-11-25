@@ -87,6 +87,10 @@ A array containing the hostname/s of your elasticsearch host/s used for send the
 to Elasticsearch by using the Elasticsearch HTTP API.
 If left empty then all other elasticsearch options are ignored
 
+#`elasticsearch_proxy_host`
+
+A string containing the hostname of your proxy host used for load balancing your cluster.
+
 #`elasticsearch_username`
 
 The username filebeats should use to authenticate should your cluster make use of shield
@@ -102,6 +106,10 @@ A string containing the protocol used by filebeats, defaults to http.
 #`elasticsearch_index`
 
 A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
+
+#`elasticsearch_ilm`
+
+A boolean that specifies whether to enable Elastic's ILM option, defaults to false
 
 #`elasticsearch_ssl_certificate_authorities`
 
@@ -134,6 +142,37 @@ A string that specifies the path to the template file
 #`export_log_paths`
 
 An array of Strings that specifies which logs the filebeats application must export.
+
+#`ilm_check_exits`
+
+A boolean when set to false, disables the check for an existing lifecycle policy. The default is true. You need to disable 
+this check if the Filebeat user connecting to a secured cluster doesn’t have the read_ilm privilege
+
+#`ilm_enabled`
+
+A string that Enables or disables index lifecycle management on any new indices created by Filebeat. Valid values are
+true, false, and auto (because auto is also an option, this can be a puppet Boolean)
+
+#`ilm_overwrite`
+
+A boolean when set to true, the lifecycle policy is overwritten at startup
+
+#`ilm_pattern`
+
+A string that specifies the rollover index pattern. Date math is supported in this setting
+
+#`ilm_policy_file`
+
+A string that specifies the path to a JSON file that contains a lifecycle policy configuration. Use this setting to load your
+own lifecycle policy
+
+#`ilm_policy_name`
+
+A string that specifies the name to use for the lifecycle policy
+
+#`ilm_rollover_alias`
+
+A string that specifies the index lifecycle write alias name
 
 #`log_settings`
 
@@ -237,7 +276,7 @@ Does not support all options available to filebeats configuration.
 If you're running a Filebeat version lower than 7.x, e.g 6.8.10. You need to install the `pre-v7.x` release in order for the module
 to be compatible - https://github.com/xneelo/hetzner-filebeats/releases
 
-If you're running Filebeat version 7 and up. You can install the `production` branch of this module or refer to the releases section again.
+If you're running Filebeat version 7 and up, release 2.0.0 and newer is supported.
 
 ## Development
 
