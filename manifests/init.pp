@@ -11,7 +11,8 @@
 # * `export_log_paths`
 # An array of Strings that specifies which logs the filebeats application must export.
 # * `inputs`
-# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application must export.
+# An array of Hashes that specifies which groups of inputs (formally known as prospectors) log entries the filebeats application 
+#  must export.
 # * `elasticsearch_username`
 # The username filebeats should use to authenticate should your cluster make use of elasticsearch
 # * `elasticsearch_password`
@@ -21,11 +22,11 @@
 # If left empty it will default to exporting logs to your local host on port 9200.
 # * `elasticsearch_protocol`
 # A string containing the protocl used by filebeats to send logs.
-# * `ssl_certificate_authorities`
+# * `elasticsearch_ssl_certificate_authorities`
 # An array of Strings that specifies paths to Certificate authority files.
-# * `ssl_certificate`
+# * `elasticsearch_ssl_certificate`
 # A String that specifies a path to your hosts certificate to use when connecting to elasticsearch.
-# * `ssl_certificate_key`
+# * `elasticsearch_ssl_certificate_key`
 # A String that specifies a path to your hosts certificate key to use when connecting to elasticsearch.
 # * `log_settings`
 # A puppet Hash containing log level ('debug', 'warning', 'error' or 'critical'),
@@ -43,6 +44,12 @@
 # *`logstash_bulk_max_size`
 # A number representing the maximum number of events to bulk in a single Logstash request, e.g 2048
 #   Setting this to zero or negative disables the splitting of batches.
+# * `logstash_ssl_certificate_authorities`
+# An array of Strings that specifies paths to Certificate authority files when connecting to logstash.
+# * `logstash_ssl_certificate`
+# A String that specifies a path to your hosts certificate to use when connecting to logstash.
+# * `logstash_ssl_certificate_key`
+# A String that specifies a path to your hosts certificate key to use when connecting to logstash.
 # *`logstash_ttl`
 # A string that specifies the Time To Live for a connection to Logstash, you must use a elastic duration e.g. '5m', '1h', '45s'
 #  see https://www.elastic.co/guide/en/beats/libbeat/master/config-file-format-type.html#_duration
@@ -52,6 +59,25 @@
 # A string that specifies the index to use for the elasticsearch output, defaults to '[filebeat-]YYYY.MM.DD' as per the package.
 # *`elasticsearch_ilm`
 # A boolean that specifies whether to enable Elastic's ILM option, defaults to false
+# *`ilm_check_exits`
+# A boolean when set to false, disables the check for an existing lifecycle policy. The default is true. You need to disable 
+#  this check if the Filebeat user connecting to a secured cluster doesn’t have the read_ilm privilege
+# *`ilm_enabled`
+# A string that Enables or disables index lifecycle management on any new indices created by Filebeat. Valid values are
+#  true, false, and auto (because auto is also an option, this can be a puppet Boolean)
+# *`ilm_overwrite`
+# A boolean when set to true, the lifecycle policy is overwritten at startup
+# *`ilm_pattern`
+# A string that specifies the rollover index pattern. Date math is supported in this setting
+# Because the variable can use %, you must cater for it like this "%%{}{now/d}-000001"
+# *`ilm_policy_file`
+# A string that specifies the path to a JSON file that contains a lifecycle policy configuration. Use this setting to load your
+#  own lifecycle policy
+# *`ilm_policy_name`
+# A string that specifies the name to use for the lifecycle policy
+# *`ilm_rollover_alias`
+# A string that specifies the index lifecycle write alias name
+# Because the variable can use %, you must cater for it like this "filebeat-%%{}{[agent.version]}"
 #
 # Example
 # --------
@@ -102,6 +128,13 @@ class filebeats (
   $logstash_worker                           = $filebeats::params::logstash_worker,
   $modules                                   = $filebeats::params::modules,
   $modules_conf_dir                          = $filebeats::params::modules_conf_dir,
+  $ilm_check_exits                           = $filebeats::params::ilm_check_exits,
+  $ilm_enabled                               = $filebeats::params::ilm_enabled,
+  $ilm_overwrite                             = $filebeats::params::ilm_overwrite,
+  $ilm_pattern                               = $filebeats::params::ilm_pattern,
+  $ilm_policy_file                           = $filebeats::params::ilm_policy_file,
+  $ilm_policy_name                           = $filebeats::params::ilm_policy_name,
+  $ilm_rollover_alias                        = $filebeats::params::ilm_rollover_alias,
   $inputs                                    = $filebeats::params::inputs,
   $service_bootstrapped                      = $filebeats::params::service_bootstrapped,
   $service_state                             = $filebeats::params::service_state,
@@ -143,6 +176,13 @@ class filebeats (
     modules                                   => $modules,
     modules_conf_dir                          => $modules_conf_dir,
     inputs                                    => $inputs,
+    ilm_check_exits                           => $ilm_check_exits,
+    ilm_enabled                               => $ilm_enabled,
+    ilm_overwrite                             => $ilm_overwrite,
+    ilm_pattern                               => $ilm_pattern,
+    ilm_policy_file                           => $ilm_policy_file,
+    ilm_policy_name                           => $ilm_policy_name,
+    ilm_rollover_alias                        => $ilm_rollover_alias,
   }
 
   Class['::filebeats::params']-> Class['::filebeats::config']

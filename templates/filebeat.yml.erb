@@ -7,6 +7,29 @@ setup.kibana:
   host: '<%= @kibana_url %>'
 
 <% end -%>
+setup.ilm:
+  enabled: <%= @ilm_enabled %>
+<% if @ilm_enabled != 'false' -%>
+<% if @ilm_rollover_alias != '' -%>
+  rollover_alias: "<%= @ilm_rollover_alias %>"
+<% end -%>
+<% if @ilm_pattern != '' -%>
+  pattern: "<%= @ilm_pattern %>"
+<% end -%>
+<% if @ilm_policy_name != '' -%>
+  policy_name: "<%= @ilm_policy_name %>"
+<% end -%>
+<% if @ilm_policy_file != '' -%>
+  policy_file: "<%= @ilm_policy_file %>"
+<% end -%>
+<% if @ilm_check_exits != '' -%>
+  check_exits: <%= @ilm_check_exits %>
+<% end -%>
+<% if @ilm_overwrite != '' -%>
+  overwrite: <%= @ilm_overwrite %>
+<% end -%>
+<% end -%>
+
 filebeat:
   inputs:
 <% @inputs_array.each do | input | -%>
