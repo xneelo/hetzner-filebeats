@@ -1,3 +1,7 @@
+## [2.1.1](https://github.com/xneelo/hetzner-filebeats/tree/2.1.1) (2021-02-03)
+
+NFR: Add license (apache 2.0)
+
 ## [2.1.0](https://github.com/xneelo/hetzner-filebeats/tree/2.1.0) (2020-11-25)
 
 ### Add support configuring filebeat ilm
