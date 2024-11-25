@@ -1,41 +1,20 @@
----
+variables:
+  TARGET_BRANCH: production
+
 stages:
-  - syntax
-  - unit
+  - promote
+  - pdk
+  - yaml-lint
+  - markdown-lint
+  - sourceclear
 
-cache:
-  paths:
-    - vendor/bundle
+default:
+  interruptible: true
+  timeout: 30m
 
-before_script:
-  - bundle -v
-  - rm Gemfile.lock || true
-  - gem update --system $RUBYGEMS_VERSION
-  - gem --version
-  - bundle -v
-  - bundle install --without system_tests --path vendor/bundle --jobs $(nproc)
+workflow:
+  rules:
+    - when: always
 
-syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop-Ruby 2.5.3-Puppet ~> 6:
-  stage: syntax
-  image: ruby:2.5.3
-  script:
-    - bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-  variables:
-    PUPPET_GEM_VERSION: '~> 6'
-
-parallel_spec-Ruby 2.5.3-Puppet ~> 6:
-  stage: unit
-  image: ruby:2.5.3
-  script:
-    - bundle exec rake parallel_spec
-  variables:
-    PUPPET_GEM_VERSION: '~> 6'
-
-parallel_spec-Ruby 2.4.5-Puppet ~> 5:
-  stage: unit
-  image: ruby:2.4.5
-  script:
-    - bundle exec rake parallel_spec
-  variables:
-    PUPPET_GEM_VERSION: '~> 5'
-
+include:
+  - local: .gitlab/ci/*.gitlab-ci.yml

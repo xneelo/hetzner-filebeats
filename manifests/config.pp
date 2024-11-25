@@ -1,6 +1,5 @@
-#Basic filebeat configuration
-#More details: https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
-
+# @summary Basic filebeat configuration
+# More details: https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
 class filebeats::config (
   Array   $elasticsearch_hosts,
   String  $elasticsearch_index,
@@ -36,13 +35,13 @@ class filebeats::config (
   String  $ilm_policy_file,
   String  $ilm_policy_name,
   String  $ilm_rollover_alias,
-){
+) {
   $config_path = $filebeats::params::config_path
 
   if empty($log_settings) {
     $logging = {}
   } else {
-    $logging = merge($::filebeats::params::log_settings, $log_settings)
+    $logging = stdlib::merge($filebeats::params::log_settings, $log_settings)
   }
 
   if !empty($logstash_ttl) {
@@ -54,20 +53,22 @@ class filebeats::config (
   if empty($inputs) {
     validate_array($export_log_paths)
 
-    $inputs_array =  [{ 'paths'      => $export_log_paths,
-                        'input_type' => 'log',
-                        'doc_type'   => 'log'
-                      }]
+    $inputs_array = [
+      { 'paths'      => $export_log_paths,
+        'input_type' => 'log',
+        'doc_type'   => 'log'
+      },
+    ]
   } else {
     $inputs_array = $inputs
   }
 
-  if ! ($ilm_enabled in [ 'auto', 'true', 'false' ]) {
+  if ! ($ilm_enabled in ['auto', 'true', 'false']) {
     fail("Parameter \$ilm_enabled with content '${ilm_enabled}': must be one of [ 'auto', 'true', 'false' ]")
   }
 
-  file {"${config_path}/filebeat.yml":
-    ensure  => present,
+  file { "${config_path}/filebeat.yml":
+    ensure  => file,
     owner   => root,
     group   => root,
     mode    => '0640',
@@ -98,5 +99,4 @@ class filebeats::config (
       }
     }
   }
-
 }
