@@ -1,0 +1,15 @@
+pdk-validate:
+  stage: pdk
+  image:
+    name: puppet/pdk:3.0.0.0
+  variables:
+    SCRIPT_PATH: '.gitlab/ci/scripts/pdk_check.sh'
+  script:
+    - echo CI_COMMIT_SHA=${CI_COMMIT_SHA}
+    - echo CI_MERGE_REQUEST_TARGET_BRANCH_NAME=${TARGET_BRANCH}
+    - git fetch origin ${TARGET_BRANCH}
+    - pdk bundle install
+    - chmod +x $SCRIPT_PATH
+    - bash ./$SCRIPT_PATH
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "staging"'

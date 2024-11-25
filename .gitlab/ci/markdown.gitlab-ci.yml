@@ -1,0 +1,7 @@
+markdownlint:
+  stage: markdown-lint
+  image: registry.gitlab.com/pipeline-components/markdownlint:latest
+  script:
+    - mdl  --style .gitlab/ci/xneelo_markdown --warnings CHANGELOG.md
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "production"'

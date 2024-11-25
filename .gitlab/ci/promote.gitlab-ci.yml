@@ -1,0 +1,42 @@
+# This workflow will update the staging and canary branches for this repository, to avoid drift
+# once production has been merged.
+
+.source_ssh_key: &set_ssh_access
+  before_script:
+    # Inject puppet group CI ssh-key variables to allow upstream push
+    - eval $(ssh-agent -s)
+    - echo "$PUPPET_WORKFLOW_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan gitlab.host-h.net >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - git config --global user.email "puppetworkflow@xneelo.com"
+    - git config --global user.name "puppetworkflow"
+
+update_staging:
+  stage: promote
+  image: bitnami/git
+  <<: *set_ssh_access
+  script:
+    - echo "This job updates the staging branch to production"
+    - git fetch -ap
+    - git checkout staging
+    - git pull --no-edit origin staging
+    - git merge --no-edit --no-ff origin/production
+    - git push -o ci-skip git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git HEAD:staging
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "production"'
+
+update_canary:
+  stage: promote
+  image: bitnami/git
+  <<: *set_ssh_access
+  script:
+    - echo "This job updates the canary branch to production"
+    - git fetch -ap
+    - git checkout canary
+    - git pull --no-edit origin canary
+    - git merge --no-edit --no-ff origin/production
+    - git push -o ci-skip git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git HEAD:canary
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "production"'

@@ -1,0 +1,66 @@
+hiera-syntax:
+  stage: yaml-lint
+  image: ruby:2.7
+  cache:
+    paths:
+    - vendor/ruby
+  before_script:
+    - bundle install -j $(nproc) --path vendor/ruby
+  script:
+    - bundle exec rake syntax:hiera
+  rules:
+    - if: '$CI_PROJECT_ID != "90"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+
+yaml-linter:
+  stage: yaml-lint
+  image: python:latest
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    SCRIPT_PATH: '.gitlab/ci/scripts/remove-missing-files.py'
+    TARGET_BRANCH: "origin/production"
+  cache:
+    paths:
+      - .cache/pip
+  before_script:
+    - EX_CODE=0
+    - python -V
+    - pip install yamllint==1.26.3 >/dev/null 2>&1
+    - chmod +x ${SCRIPT_PATH}
+  script:
+    - export CHANGED_FILES=$(git diff --name-only ${CI_COMMIT_SHA} ${TARGET_BRANCH} | grep '\.yaml'$) || echo "NO CHANGES DETECTED"
+    - echo ${CHANGED_FILES}
+    - echo "IF YOU SEE MORE FILES THAN ANTICIPATED HERE - PULL 'PRODUCTION' INTO YOUR BRANCH"
+    - if [ -z "${CHANGED_FILES}" ]; then exit 0; fi # Exit if empty, to prevent pipeline failure.
+    - export PRUNED_FILES=$(python "${SCRIPT_PATH}") # Sort files that may be removed
+    - if [ -z "${PRUNED_FILES}" ]; then exit 0; fi # No files sanitized, therefore not necessary to run yamllint
+    - while IFS= read -r line; do yamllint $line; done <<< "$PRUNED_FILES" || EX_CODE=$?
+    - if [ ${EX_CODE} -ne 0 ]; then echo "FILES/S LINTING ISSUES DETECTED!" ; else echo "NO PROBLEM/S DETECTED!"; fi
+    - exit ${EX_CODE}
+  rules:
+    - if: '$CI_PROJECT_ID != "90"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+
+scan_images:
+  stage: sourceclear
+  image: docker
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
+  before_script:
+    - apk add --update curl
+  script:
+    - docker image pull ruby:2.7
+    - docker image pull python:latest
+    - curl -sSL https://download.sourceclear.com/ci.sh | sh -s scan --image ruby:2.7
+    - curl -sSL https://download.sourceclear.com/ci.sh | sh -s scan --image python:latest
+  rules:
+    - if: '$CI_PROJECT_ID != "90"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
