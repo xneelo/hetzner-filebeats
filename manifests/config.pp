@@ -1,4 +1,3 @@
-#Basic filebeat configuration
 # This Puppet manifest configures Filebeat, a lightweight shipper for forwarding and centralizing log data.
 # For more details on configuring Filebeat, refer to the official documentation:
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html

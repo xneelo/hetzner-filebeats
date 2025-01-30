@@ -1,5 +1,3 @@
-# Filebeats default params
-#
 # This class contains the default parameters for configuring Filebeats.
 # It includes settings for Elasticsearch, Logstash, ILM, and logging.
 #
