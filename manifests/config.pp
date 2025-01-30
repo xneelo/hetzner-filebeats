@@ -1,111 +1,110 @@
-#Basic filebeat configuration
-#More details: https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
-
-# Class: filebeats::config
+# This Puppet manifest configures Filebeat, a lightweight shipper for forwarding and centralizing log data.
+# For more details on configuring Filebeat, refer to the official documentation:
+# https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
+# Parameters:
 #
-# @summary Configure Filebeat to ship logs to Elasticsearch, Logstash, and Kibana.
+# @param elasticsearch_hosts
+#   An array of Elasticsearch hosts to which Filebeats will send data.
 #
-#   @param elasticsearch_hosts
-#     List of Elasticsearch hosts.
+# @param elasticsearch_index
+#   The index name to use for Elasticsearch.
 #
-#   @param elasticsearch_index
-#     Elasticsearch index name.
+# @param elasticsearch_password
+#   The password for Elasticsearch authentication.
 #
-#   @param elasticsearch_password
-#     Password for Elasticsearch authentication.
+# @param elasticsearch_protocol
+#   The protocol to use for connecting to Elasticsearch (e.g., 'http' or 'https').
 #
-#   @param elasticsearch_protocol
-#     Protocol to use for Elasticsearch (e.g., http, https).
+# @param elasticsearch_ssl_certificate
+#   The path to the SSL certificate for Elasticsearch.
 #
-#   @param elasticsearch_ssl_certificate
-#     Path to the SSL certificate for Elasticsearch.
+# @param elasticsearch_ssl_certificate_authorities
+#   An array of paths to the SSL certificate authorities for Elasticsearch.
 #
-#   @param elasticsearch_ssl_certificate_authorities
-#     List of paths to the SSL certificate authorities for Elasticsearch.
+# @param elasticsearch_ssl_certificate_key
+#   The path to the SSL certificate key for Elasticsearch.
 #
-#   @param elasticsearch_ssl_certificate_key
-#     Path to the SSL certificate key for Elasticsearch.
+# @param elasticsearch_template_enabled
+#   Boolean to enable or disable Elasticsearch template.
 #
-#   @param elasticsearch_template_enabled
-#     Whether to enable Elasticsearch template.
+# @param elasticsearch_template_name
+#   The name of the Elasticsearch template.
 #
-#   @param elasticsearch_template_name
-#     Name of the Elasticsearch template.
+# @param elasticsearch_template_overwrite
+#   Boolean to enable or disable overwriting the Elasticsearch template.
 #
-#   @param elasticsearch_template_overwrite
-#     Whether to overwrite the existing Elasticsearch template.
+# @param elasticsearch_template_path
+#   The path to the Elasticsearch template file.
 #
-#   @param elasticsearch_template_path
-#     Path to the Elasticsearch template file.
+# @param elasticsearch_username
+#   The username for authenticating with Elasticsearch.
 #
-#   @param elasticsearch_username
-#     Username for Elasticsearch authentication.
+# @param export_log_paths
+#   An array of paths to the log files to be exported.
 #
-#   @param export_log_paths
-#     List of paths to export logs from.
+# @param kibana_url
+#   The URL of the Kibana instance.
 #
-#   @param kibana_url
-#     URL of the Kibana instance.
+# @param log_settings
+#   A hash of log settings.
 #
-#   @param log_settings
-#     Settings for logging.
+# @param logstash_hosts
+#   An array of Logstash hosts.
 #
-#   @param logstash_hosts
-#     List of Logstash hosts.
+# @param logstash_bulk_max_size
+#   The maximum size of bulk requests to Logstash.
 #
-#   @param logstash_bulk_max_size
-#     Maximum size of bulk requests to Logstash.
+# @param logstash_index
+#   The index to use for Logstash.
 #
-#   @param logstash_index
-#     Logstash index name.
+# @param logstash_loadbalance
+#   Boolean to enable or disable load balancing for Logstash.
 #
-#   @param logstash_loadbalance
-#     Whether to enable load balancing for Logstash.
+# @param logstash_worker
+#   The number of workers for Logstash.
 #
-#   @param logstash_worker
-#     Number of workers for Logstash.
+# @param logstash_ssl_certificate
+#   The path to the SSL certificate for Logstash.
 #
-#   @param logstash_ssl_certificate
-#     Path to the SSL certificate for Logstash.
+# @param logstash_ssl_certificate_authorities
+#   An array of paths to the SSL certificate authorities for Logstash.
 #
-#   @param logstash_ssl_certificate_authorities
-#     List of paths to the SSL certificate authorities for Logstash.
+# @param logstash_ssl_certificate_key
+#   The path to the SSL certificate key for Logstash.
 #
-#   @param logstash_ssl_certificate_key
-#     Path to the SSL certificate key for Logstash.
+# @param logstash_ttl
+#   The time-to-live (TTL) for Logstash events.
 #
-#   @param logstash_ttl
-#     Time-to-live for Logstash events.
+# @param modules
+#   A hash of module configurations.
 #
-#   @param modules
-#     Configuration for Filebeat modules.
+# @param modules_conf_dir
+#   The directory for module configuration files.
 #
-#   @param modules_conf_dir
-#     Directory for Filebeat module configurations.
+# @param inputs
+#   An array of input configurations.
 #
-#   @param inputs
-#     List of input configurations for Filebeat.
+# @param ilm_check_exits
+#   Boolean to check if ILM (Index Lifecycle Management) exists.
 #
-#   @param ilm_check_exits
-#     Whether to check if ILM (Index Lifecycle Management) exists.
+# @param ilm_enabled
+#   The status of ILM (enabled or disabled).
 #
-#   @param ilm_enabled
-#     Whether ILM is enabled.
+# @param ilm_overwrite
+#   Boolean to enable or disable overwriting ILM policies.
 #
-#   @param ilm_overwrite
-#     Whether to overwrite existing ILM policies.
+# @param ilm_pattern
+#   The pattern for ILM indices.
 #
-#   @param ilm_pattern
-#     Pattern for ILM indices.
+# @param ilm_policy_file
+#   The path to the ILM policy file.
 #
-#   @param ilm_policy_file
-#     Path to the ILM policy file.
+# @param ilm_policy_name
+#   The name of the ILM policy.
 #
-#   @param ilm_policy_name
-#     Name of the ILM policy.
+# @param ilm_rollover_alias
+#   The rollover alias for ILM.
 #
-#   @param ilm_rollover_alias
-#     Rollover alias for ILM.
 class filebeats::config (
   Array   $elasticsearch_hosts,
   String  $elasticsearch_index,
@@ -147,7 +146,7 @@ class filebeats::config (
   if empty($log_settings) {
     $logging = {}
   } else {
-    $logging = stdlib::merge($filebeats::params::log_settings, $log_settings)
+    $logging = merge($filebeats::params::log_settings, $log_settings)
   }
 
   if !empty($logstash_ttl) {
@@ -168,7 +167,7 @@ class filebeats::config (
     $inputs_array = $inputs
   }
 
-  if ! ($ilm_enabled in [ 'auto', 'true', 'false' ]) {
+  if ! ($ilm_enabled in ['auto', 'true', 'false']) {
     fail("Parameter \$ilm_enabled with content '${ilm_enabled}': must be one of [ 'auto', 'true', 'false' ]")
   }
 
