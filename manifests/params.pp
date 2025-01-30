@@ -1,5 +1,8 @@
 # Filebeats default params
-
+#
+# This class contains the default parameters for configuring Filebeats.
+# It includes settings for Elasticsearch, Logstash, ILM, and logging.
+#
 class filebeats::params {
   $elasticsearch_hosts                       = []
   $elasticsearch_index                       = ''
@@ -24,9 +27,9 @@ class filebeats::params {
   $logstash_ssl_certificate_key              = ''
   $logstash_ttl                              = ''
   $modules                                   = {
-                                                  enable  => [],
-                                                  disable => []
-                                                }
+    enable  => [],
+    disable => [],
+  }
   $modules_conf_dir                          = '/etc/filebeat/modules.d'
   $ilm_check_exits                           = true
   $ilm_enabled                               = 'auto'
@@ -38,16 +41,16 @@ class filebeats::params {
   $inputs                                    = []
   $service_bootstrapped                      = true
   $service_state                             = 'running'
-  $log_settings                              =  {
-                                                  level => 'error',
-                                                  to_syslog => false,
-                                                  to_files  => true,
-                                                  path  => '/var/log/filebeat',
-                                                  keepfiles => 7,
-                                                  name  => 'filebeats.log',
-                                                  rotateeverybytes => 10485760,
-                                                }
-  case $::osfamily {
+  $log_settings                              = {
+    level => 'error',
+    to_syslog => false,
+    to_files  => true,
+    path  => '/var/log/filebeat',
+    keepfiles => 7,
+    name  => 'filebeats.log',
+    rotateeverybytes => 10485760,
+  }
+  case $facts['os']['family'] {
     'Debian': {
       $export_log_paths = ['/var/log/*.log']
       $config_path      = '/etc/filebeat'
