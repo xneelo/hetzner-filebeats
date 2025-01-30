@@ -109,7 +109,6 @@ class filebeats::config (
   Array   $elasticsearch_hosts,
   String  $elasticsearch_index,
   String  $elasticsearch_password,
-
   String  $elasticsearch_protocol,
   String  $elasticsearch_ssl_certificate,
   Array   $elasticsearch_ssl_certificate_authorities,
@@ -147,7 +146,7 @@ class filebeats::config (
   if empty($log_settings) {
     $logging = {}
   } else {
-    $logging = merge($filebeats::params::log_settings, $log_settings)
+    $logging = stdlib::merge($filebeats::params::log_settings, $log_settings)
   }
 
   if !empty($logstash_ttl) {
