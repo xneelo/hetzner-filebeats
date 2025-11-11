@@ -1,7 +1,7 @@
 # Basic setup of filebeats repository and installtion
 # More details see: https://www.elastic.co/guide/en/beats/libbeat/current/setup-repositories.html
 class filebeats::package {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       package {'filebeat':
         ensure  => present,
